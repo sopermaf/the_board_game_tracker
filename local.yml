@@ -1,0 +1,51 @@
+version: '3'
+
+volumes:
+  the_board_game_tracker_local_postgres_data: {}
+  the_board_game_tracker_local_postgres_data_backups: {}
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+    image: the_board_game_tracker_local_django
+    container_name: the_board_game_tracker_local_django
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app:z
+    env_file:
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
+    ports:
+      - "8000:8000"
+    command: /start
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: the_board_game_tracker_production_postgres
+    container_name: the_board_game_tracker_local_postgres
+    volumes:
+      - the_board_game_tracker_local_postgres_data:/var/lib/postgresql/data
+      - the_board_game_tracker_local_postgres_data_backups:/backups
+    env_file:
+      - ./.envs/.local/.postgres
+
+  docs:
+    image: the_board_game_tracker_local_docs
+    container_name: the_board_game_tracker_local_docs
+    build:
+      context: .
+      dockerfile: ./compose/local/docs/Dockerfile
+    env_file:
+      - ./.envs/.local/.django
+    volumes:
+      - ./docs:/docs:z
+      - ./config:/app/config:z
+      - ./the_board_game_tracker:/app/the_board_game_tracker:z
+    ports:
+      - "9000:9000"
+    command: /start-docs

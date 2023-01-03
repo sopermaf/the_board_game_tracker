@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=the_board_game_tracker
+POSTGRES_USER=IKgNpJHSZQeFxMZBAphkqqIIUUMNRDNX
+POSTGRES_PASSWORD=RHxUARAWZWY7IFWCeQQXTmbW0uGtQNVvJVaOLPrfBOS9DuwD8HUagjZNCvtyWNKW
