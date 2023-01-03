@@ -265,7 +265,9 @@ ACCOUNT_FORMS = {"signup": "the_board_game_tracker.users.forms.UserSignupForm"}
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 SOCIALACCOUNT_ADAPTER = "the_board_game_tracker.users.adapters.SocialAccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
-SOCIALACCOUNT_FORMS = {"signup": "the_board_game_tracker.users.forms.UserSocialSignupForm"}
+SOCIALACCOUNT_FORMS = {
+    "signup": "the_board_game_tracker.users.forms.UserSocialSignupForm"
+}
 
 
 # Your stuff...
