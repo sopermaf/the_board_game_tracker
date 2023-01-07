@@ -5,17 +5,20 @@ build:
 	docker-compose -f $(COMPOSE_FILE) build
 
 migrate:
-	docker-compose -f $(COMPOSE_FILE) run --rm django python manage.py migrate
+	$(MAKE) django-migrate
 
 # ensures all services are running
 runserver:
 	docker-compose -f $(COMPOSE_FILE) up
 
-make-migration:
-	docker-compose -f $(COMPOSE_FILE) run --rm django python manage.py makemigrations
+makemigrations:
+	$(MAKE) django-makemigrations
 
-django-command:
-	docker-compose -f local.yml run --rm django python manage.py $(command)
+shell:
+	$(MAKE) django-shell
+
+django-%:
+	docker-compose -f local.yml run --rm django python manage.py $*
 
 test:
 	docker-compose -f $(COMPOSE_FILE) run django pytest --disable-warnings
