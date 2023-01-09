@@ -11,7 +11,7 @@ class LeaderBoard(ListView):
 
     model = User
     queryset = User.leaderboard.with_counts().all()
-    template_name = "games/home.html"
+    template_name = "games/leaderboard.html"
     context_object_name = "users"
 
     def get_context_data(self, **kwargs):
@@ -23,7 +23,6 @@ class LeaderBoard(ListView):
 class BoardGameListView(ListView):
     model = BoardGame
     queryset = BoardGame.objects.all()
-    template_name = "games/board_game_list_view.html"
     context_object_name = "games"
 
 

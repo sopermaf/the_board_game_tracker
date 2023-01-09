@@ -4,7 +4,7 @@
     <h3> Total board games: {{ board_game_count }} </h3>
     <table>
         <tr>
-            <th scope="col">Place</th>
+            <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Games Unplayed</th>
           </tr>
@@ -12,7 +12,7 @@
         {% for user in users %}
         <tr>
             <td>{{ forloop.counter }}</td>
-            <td>{{ user.name }}</td>
+            <td>{{ user.username|capfirst }}</td>
             <td>{{ user.number_unplayed_games }}</td>
         </tr>
         {% endfor %}
