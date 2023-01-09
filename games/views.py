@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.views.generic import DetailView, ListView
+from django_filters.views import FilterView
 
+from .filters import BoardGameFilter
 from .models import BoardGame
 
 User = get_user_model()
@@ -20,10 +22,11 @@ class LeaderBoard(ListView):
         return context
 
 
-class BoardGameListView(ListView):
+class BoardGameListView(FilterView):
     model = BoardGame
     queryset = BoardGame.objects.all()
     context_object_name = "games"
+    filterset_class = BoardGameFilter
 
 
 class BoardGameDetailView(DetailView):
