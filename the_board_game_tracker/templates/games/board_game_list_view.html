@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <table>
+        <tr>
+            <th scope="col">Name</th>
+          </tr>
+        </tr>
+        {% for game in games %}
+        <tr>
+            <td>{{ game.name }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

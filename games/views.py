@@ -18,3 +18,10 @@ class LeaderBoard(ListView):
         context = super().get_context_data(**kwargs)
         context["board_game_count"] = BoardGame.objects.count()
         return context
+
+
+class BoardGameListView(ListView):
+    model = BoardGame
+    queryset = BoardGame.objects.all()
+    template_name = "games/board_game_list_view.html"
+    context_object_name = "games"
