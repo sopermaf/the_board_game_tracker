@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <ul>
+        <li> Name: {{ game.name|capfirst }} </li>
+        <li>
+            Played By:
+            <ul>
+                {% for player in game.played_by.all %}
+                    <li> {{ player|capfirst }} </li>
+                {% empty %}
+                    Nobody
+                {% endfor %}
+            </ul>
+        </li>
+    </ul>
+{% endblock %}

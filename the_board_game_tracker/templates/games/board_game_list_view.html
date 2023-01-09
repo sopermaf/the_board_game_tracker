@@ -8,7 +8,9 @@
         </tr>
         {% for game in games %}
         <tr>
-            <td>{{ game.name }}</td>
+            <td>
+                <a href="{% url 'games:detail' game.name  %}">{{ game.name|capfirst }}</a>
+            </td>
         </tr>
         {% endfor %}
     </table>

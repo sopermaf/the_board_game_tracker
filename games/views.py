@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from django.views.generic import ListView
+from django.views.generic import DetailView, ListView
 
 from .models import BoardGame
 
@@ -25,3 +25,10 @@ class BoardGameListView(ListView):
     queryset = BoardGame.objects.all()
     template_name = "games/board_game_list_view.html"
     context_object_name = "games"
+
+
+class BoardGameDetailView(DetailView):
+    model = BoardGame
+    slug_field = "name"
+    slug_url_kwarg = "name"
+    context_object_name = "game"
