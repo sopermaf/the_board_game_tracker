@@ -9,12 +9,26 @@
     <table>
         <tr>
             <th scope="col">Name</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Duration (mins)</th>
+            <th scope="col">Number of Players</th>
+            <th scope="col">Tags</th>
           </tr>
         </tr>
         {% for game in games %}
         <tr>
             <td>
                 <a href="{% url 'games:detail' game.name  %}">{{ game.name|capfirst }}</a>
+            </td>
+            <td> {{ game.game_weight }} </td>
+            <td> {{ game.game_duration_mins }} </td>
+            <td> {{ game.range_of_players }} </td>
+            <td>
+                <ul>
+                {% for tag in game.tags.all %}
+                    <li> {{ tag }} </li>
+                {% endfor %}
+                </ul>
             </td>
         </tr>
         {% endfor %}

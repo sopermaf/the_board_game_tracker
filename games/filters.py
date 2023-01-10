@@ -1,27 +1,47 @@
-from django.contrib.auth import get_user_model
-from django.forms import CheckboxSelectMultiple
-from django_filters import FilterSet
-from django_filters.filters import ModelMultipleChoiceFilter
+from typing import Any
 
-from .models import BoardGame, GameCategory
+from django.contrib.auth import get_user_model
+from django.db.models import QuerySet
+from django.forms import CheckboxSelectMultiple
+from django_filters import FilterSet, NumberFilter, RangeFilter
+from django_filters.filters import ModelMultipleChoiceFilter
+from psycopg2.extras import NumericRange
+
+from .models import BoardGame, BoardGameTag
 
 User = get_user_model()
 
 
 class BoardGameFilter(FilterSet):
-    # not_played_by = ModelChoiceFilter(choices=, )
     not_played_by = ModelMultipleChoiceFilter(
         field_name="played_by",
         exclude=True,
         queryset=User.objects.all(),
         widget=CheckboxSelectMultiple,
     )
-    category = ModelMultipleChoiceFilter(
-        field_name="category",
-        queryset=GameCategory.objects.all(),
+    tags = ModelMultipleChoiceFilter(
+        field_name="tags",
+        queryset=BoardGameTag.objects.all(),
         widget=CheckboxSelectMultiple,
+        method="must_contain_all",
+    )
+    game_weight = RangeFilter()
+    game_duration_mins = RangeFilter()
+    number_of_players = NumberFilter(
+        field_name="range_of_players", method="int_within_range"
     )
 
     class Meta:
         model = BoardGame
-        fields = ["category", "not_played_by"]
+        fields = [
+            "tags",
+            "not_played_by",
+        ]
+
+    def int_within_range(self, queryset: QuerySet, name: str, value: int):
+        return queryset.filter(**{f"{name}__contains": NumericRange(value, value + 1)})
+
+    def must_contain_all(Self, qs: QuerySet, name: str, value: Any):
+        for v in value:
+            qs = qs.filter(**{f"{name}__in": [v]})
+        return qs
