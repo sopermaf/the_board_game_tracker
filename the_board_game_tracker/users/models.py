@@ -1,19 +1,7 @@
 from django.contrib.auth.models import AbstractUser, UserManager
-from django.db.models import CharField, Count, Manager
+from django.db.models import CharField
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-
-
-class LeaderBoardManager(Manager):
-    def with_counts(self):
-        from games.models import BoardGame
-
-        total_board_games = BoardGame.objects.count()
-        return self.annotate(
-            number_unplayed_games=total_board_games - Count("games")
-        ).order_by(
-            "number_unplayed_games",
-        )
 
 
 class User(AbstractUser):
@@ -29,7 +17,6 @@ class User(AbstractUser):
     last_name = None  # type: ignore
 
     objects = UserManager()
-    leaderboard = LeaderBoardManager()
 
     def get_absolute_url(self):
         """Get url for user's detail view.
