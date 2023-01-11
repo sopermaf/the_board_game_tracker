@@ -21,7 +21,7 @@ class LeaderBoard(ListView):
         context["board_game_count"] = BoardGame.objects.count()
         return context
 
-    def get_queryset(self) -> QuerySet[User]:
+    def get_queryset(self) -> QuerySet:
         qs = super().get_queryset()
         total_board_games = BoardGame.objects.count()
         return qs.annotate(
