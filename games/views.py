@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.db.models import Count, QuerySet
 from django.views.generic import DetailView, ListView
 from django_filters.views import FilterView
 
@@ -12,7 +13,6 @@ class LeaderBoard(ListView):
     """Shows the top players with fewest remaining games"""
 
     model = User
-    queryset = User.leaderboard.with_counts().all()
     template_name = "games/leaderboard.html"
     context_object_name = "users"
 
@@ -20,6 +20,15 @@ class LeaderBoard(ListView):
         context = super().get_context_data(**kwargs)
         context["board_game_count"] = BoardGame.objects.count()
         return context
+
+    def get_queryset(self) -> QuerySet[User]:
+        qs = super().get_queryset()
+        total_board_games = BoardGame.objects.count()
+        return qs.annotate(
+            number_unplayed_games=total_board_games - Count("games")
+        ).order_by(
+            "number_unplayed_games",
+        )
 
 
 class BoardGameListView(FilterView):
