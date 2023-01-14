@@ -18,7 +18,7 @@ production-update: build stop migrate
 	docker-compose -f $(COMPOSE_FILE) up -d
 
 logs-follow:
-	docker-compose -f $(COMPOSE_FILE) logs -f
+	docker-compose -f $(COMPOSE_FILE) logs -f $(container)
 
 makemigrations:
 	$(MAKE) django-makemigrations
@@ -27,7 +27,7 @@ shell:
 	$(MAKE) django-shell
 
 django-%:
-	docker-compose -f $(COMPOSE_FILE) run --rm django python manage.py $*
+	docker-compose -f $(COMPOSE_FILE) run --rm django python manage.py $* $(args)
 
 test:
 	docker-compose -f $(COMPOSE_FILE) run django pytest --disable-warnings
