@@ -6,6 +6,7 @@ whitenoise==6.2.0  # https://github.com/evansd/whitenoise
 redis==4.4.0  # https://github.com/redis/redis-py
 hiredis==2.1.0  # https://github.com/redis/hiredis-py
 django-filter==22.1
+inclusive-django-range-fields==0.2.3
 
 # Django
 # ------------------------------------------------------------------------------
