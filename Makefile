@@ -27,7 +27,7 @@ shell:
 	$(MAKE) django-shell
 
 django-%:
-	docker-compose -f local.yml run --rm django python manage.py $*
+	docker-compose -f $(COMPOSE_FILE) run --rm django python manage.py $*
 
 test:
 	docker-compose -f $(COMPOSE_FILE) run django pytest --disable-warnings
