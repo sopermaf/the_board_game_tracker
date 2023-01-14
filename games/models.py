@@ -27,7 +27,7 @@ class BoardGame(models.Model):
         validators=[MaxValueValidator(5), MinValueValidator(1)],
     )
     range_of_players = IntegerRangeField()
-    game_duration_mins = models.PositiveBigIntegerField()
+    game_duration_range_mins = IntegerRangeField(validators=[MinValueValidator(0)])
 
     class Meta:
         ordering = ["name"]
