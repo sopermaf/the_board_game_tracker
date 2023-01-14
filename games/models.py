@@ -1,5 +1,4 @@
 from django.contrib.auth import get_user_model
-from django.contrib.postgres.fields import IntegerRangeField
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.urls import reverse
@@ -27,8 +26,8 @@ class BoardGame(models.Model):
         max_digits=3,
         validators=[MaxValueValidator(5), MinValueValidator(1)],
     )
-    range_of_players = IntegerRangeField()
-    game_duration_mins = InclusiveIntegerRangeField(null=True)
+    range_of_players = InclusiveIntegerRangeField()
+    game_duration_mins = InclusiveIntegerRangeField()
 
     class Meta:
         ordering = ["name"]
