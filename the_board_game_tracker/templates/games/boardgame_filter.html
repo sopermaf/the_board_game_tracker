@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% load games_extras %}
 
 {% block inline_javascript %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -34,8 +35,8 @@ $(".chosen-select").chosen({
                 <a href="{% url 'games:detail' game.name  %}">{{ game.name|capfirst }}</a>
             </td>
             <td> {{ game.game_weight }} </td>
-            <td> {{ game.game_duration_mins }} </td>
-            <td> {{ game.range_of_players }} </td>
+            <td> {{ game.game_duration_mins|humaize_inclusive_range }} </td>
+            <td> {{ game.range_of_players|humaize_inclusive_range }} </td>
             <td>
                 <ul>
                 {% for tag in game.tags.all %}
