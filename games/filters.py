@@ -33,7 +33,7 @@ class BoardGameFilter(FilterSet):
         method="must_contain_all",
     )
     game_weight = RangeFilter()
-    game_duration_mins = RangeFilter()
+    game_duration_mins = NumberFilter(method="int_within_range")
     number_of_players = NumberFilter(
         field_name="range_of_players", method="int_within_range"
     )
