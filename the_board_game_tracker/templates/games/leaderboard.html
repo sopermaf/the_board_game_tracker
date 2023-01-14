@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block inline_javascript %}
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+{% endblock %}
+
 {% block content %}
     <h3> Total board games: {{ board_game_count }} </h3>
     <table>
@@ -10,11 +14,19 @@
           </tr>
         </tr>
         {% for user in users %}
-        <tr>
-            <td>{{ forloop.counter }}</td>
-            <td>{{ user.username|capfirst }}</td>
-            <td>{{ user.number_unplayed_games }}</td>
-        </tr>
+            {% comment "different styling per place" %}{% endcomment %}
+            {% if forloop.first  %}
+            <tr class="leaderboard_winner">
+            {% else  %}
+            <tr>
+            {% endif %}
+                <td>{{ forloop.counter }}</td>
+                <td>
+                    {% if forloop.first %} <i class='fas fa-crown'></i> {% endif %}
+                    {{ user.username|capfirst }}
+                </td>
+                <td>{{ user.number_unplayed_games }}</td>
+            </tr>
         {% endfor %}
     </table>
 {% endblock %}
