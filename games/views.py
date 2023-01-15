@@ -18,7 +18,7 @@ class LeaderBoard(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["board_game_count"] = BoardGame.objects.count()
+        context["user_count"] = User.objects.count()
         return context
 
     def get_queryset(self) -> QuerySet:
@@ -26,9 +26,7 @@ class LeaderBoard(ListView):
         total_board_games = BoardGame.objects.count()
         return qs.annotate(
             number_unplayed_games=total_board_games - Count("games")
-        ).order_by(
-            "number_unplayed_games",
-        )
+        ).order_by("number_unplayed_games",)[:10]
 
 
 class BoardGameListView(FilterView):
