@@ -1,15 +1,30 @@
 {% extends "base.html" %}
 
+{% load games_extras %}
+
 {% block content %}
     <ul>
         <li> Name: {{ game.name|capfirst }} </li>
+        <li> Weight: {{ game.game_weight }} </li>
+        <li> Duration (mins): {{ game.game_duration_mins|humaize_inclusive_range }} </li>
+        <li> Players: {{ game.range_of_players|humaize_inclusive_range }} </li>
+        <li>
+            Tags:
+            <ul>
+                {% for tag in game.tags.all %}
+                    <li> {{ tag }} </li>
+                {% empty %}
+                    No tags!
+                {% endfor %}
+            </ul>
+        </li>
         <li>
             Played By:
             <ul>
                 {% for player in game.played_by.all %}
                     <li> {{ player|capfirst }} </li>
                 {% empty %}
-                    Nobody
+                    Nobody!
                 {% endfor %}
             </ul>
         </li>
