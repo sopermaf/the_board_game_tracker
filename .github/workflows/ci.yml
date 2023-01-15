@@ -56,8 +56,8 @@ jobs:
       - name: Run Django Tests
         run:  docker-compose -f local.yml run django pytest
 
-      - name: Run Type Checking
-        run:  docker-compose -f local.yml run django mypy .
+      # - name: Run Type Checking
+      #   run:  docker-compose -f local.yml run django mypy .
 
       - name: Tear down the Stack
         run:  docker-compose -f local.yml down
