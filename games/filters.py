@@ -34,7 +34,9 @@ class BoardGameFilter(FilterSet):
     )
     game_weight = RangeFilter()
     game_duration_mins = NumberFilter(method="int_within_range")
-    range_of_players = NumberFilter(method="int_within_range", label="numer_of_players")
+    range_of_players = NumberFilter(
+        method="int_within_range", label="Number of Players"
+    )
 
     class Meta:
         model = BoardGame
