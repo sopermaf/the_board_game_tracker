@@ -14,12 +14,7 @@
           </tr>
         </tr>
         {% for user in users %}
-            {% comment "different styling per place" %}{% endcomment %}
-            {% if forloop.first  %}
-            <tr class="leaderboard_winner">
-            {% else  %}
-            <tr>
-            {% endif %}
+            <tr {% if forloop.first %}class="leaderboard_winner" {% endif %}>
                 <td>{{ forloop.counter }}</td>
                 <td>
                     {% if forloop.first %} <i class='fas fa-crown'></i> {% endif %}
