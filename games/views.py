@@ -24,14 +24,13 @@ class LeaderBoard(ListView):
     def get_queryset(self) -> QuerySet:
         qs = super().get_queryset()
         total_board_games = BoardGame.objects.count()
-        return qs.annotate(
-            number_unplayed_games=total_board_games - Count("games")
-        ).order_by("number_unplayed_games",)[:10]
+        qs = qs.annotate(number_unplayed_games=total_board_games - Count("games"))
+        qs = qs.order_by("number_unplayed_games", "username")
+        return qs[:10]
 
 
 class BoardGameListView(FilterView):
     model = BoardGame
-    queryset = BoardGame.objects.all()
     context_object_name = "games"
     filterset_class = BoardGameFilter
 

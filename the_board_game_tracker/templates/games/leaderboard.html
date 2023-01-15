@@ -5,7 +5,8 @@
 {% endblock %}
 
 {% block content %}
-    <h3> Total Players: {{ user_count }} </h3>
+    <h1> Top 10 Players </h1>
+    <p> Total Players: {{ user_count }} </p>
     <table>
         <tr>
             <th scope="col">#</th>
@@ -24,4 +25,5 @@
             </tr>
         {% endfor %}
     </table>
+
 {% endblock %}
