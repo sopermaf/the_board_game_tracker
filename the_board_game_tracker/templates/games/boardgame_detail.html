@@ -3,30 +3,51 @@
 {% load games_extras %}
 
 {% block content %}
-    <ul>
-        <li> Name: {{ game.name|capfirst }} </li>
-        <li> Weight: {{ game.game_weight }} </li>
-        <li> Duration (mins): {{ game.game_duration_mins|humaize_inclusive_range }} </li>
-        <li> Players: {{ game.range_of_players|humaize_inclusive_range }} </li>
-        <li>
-            Tags:
-            <ul>
-                {% for tag in game.tags.all %}
-                    <li> {{ tag }} </li>
-                {% empty %}
-                    No tags!
-                {% endfor %}
-            </ul>
-        </li>
-        <li>
-            Played By:
-            <ul>
-                {% for player in game.played_by.all %}
-                    <li> {{ player|capfirst }} </li>
-                {% empty %}
-                    Nobody!
-                {% endfor %}
-            </ul>
-        </li>
-    </ul>
+    <div class="row">
+        <div class="col-sm-12 col-lg-6">
+            <h2> {{ game.name|capfirst }} </h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-lg-6">
+            <table>
+                <tr>
+                    <th scope="row"> Weight </th>
+                    <td> {{ game.game_weight }} </td>
+                </tr>
+                <tr>
+                    <th scope="row"> Players </th>
+                    <td> {{ game.range_of_players|humaize_inclusive_range }} </td>
+                </tr>
+                <tr>
+                    <th scope="row"> Duration (mins) </th>
+                    <td> {{ game.game_duration_mins|humaize_inclusive_range }} </td>
+                </tr>
+                <tr>
+                    <th scope="row"> Tags </th>
+                    <td>
+                        <ul>
+                            {% for tag in game.tags.all %}
+                                <li> {{ tag }} </li>
+                            {% empty %}
+                                No tags!
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"> Played By </th>
+                    <td>
+                        <ul>
+                            {% for player in game.played_by.all %}
+                                <li> {{ player|capfirst }} </li>
+                            {% empty %}
+                                Nobody!
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 {% endblock %}

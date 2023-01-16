@@ -42,6 +42,10 @@ th {
   padding: 10px;
 }
 
+/* tr > th[scope="row"] {
+  background: #ff8400cc;
+} */
+
 .primary{
   background-color: #000000
 }
@@ -53,4 +57,21 @@ tfoot > tr  {
 
 tbody > tr:hover {
   background-color: #f6f4d1cc;
+}
+
+form {
+  border: 1px solid #000000;
+  margin-bottom: 1em;
+}
+
+form > p {
+  margin: 2%;
+}
+
+form > input[type="submit"] {
+  margin: 2%;
+}
+
+p > input[type="text"] {
+  display: flexbox;
 }

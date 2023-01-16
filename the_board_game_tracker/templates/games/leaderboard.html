@@ -15,8 +15,9 @@
           </tr>
         </tr>
         {% for user in users %}
+
             <tr {% if forloop.first %}class="leaderboard_winner" {% endif %}>
-                <td>{{ forloop.counter }}</td>
+                <th scope="row">{{ forloop.counter }}</th>
                 <td>
                     {% if forloop.first %} <i class='fas fa-crown'></i> {% endif %}
                     {{ user.username|capfirst }}

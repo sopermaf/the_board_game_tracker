@@ -15,36 +15,45 @@ $(".chosen-select").chosen({
 
 
 {% block content %}
-    <form action="" method="get">
-        {{ filter.form.as_p }}
-        <input type="submit" />
-    </form>
-
-    <table>
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Weight</th>
-            <th scope="col">Duration (mins)</th>
-            <th scope="col">Number of Players</th>
-            <th scope="col">Tags</th>
-          </tr>
-        </tr>
-        {% for game in games %}
-        <tr>
-            <td>
-                <a href="{% url 'games:detail' game.name  %}">{{ game.name|capfirst }}</a>
-            </td>
-            <td> {{ game.game_weight }} </td>
-            <td> {{ game.game_duration_mins|humaize_inclusive_range }} </td>
-            <td> {{ game.range_of_players|humaize_inclusive_range }} </td>
-            <td>
-                <ul>
-                {% for tag in game.tags.all %}
-                    <li> {{ tag }} </li>
+    <div class="row">
+        <div class="col-sm-8 col-lg-5">
+            <h2> Search </h2>
+            <form action="" method="get">
+                {{ filter.form.as_p }}
+                <input type="submit" />
+            </form>
+        </div>
+        <div class="col-lg-1">
+        </div>
+        <div class="col-sm-8 col-lg-4">
+            <h2> Games </h2>
+            <table>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Weight</th>
+                    <th scope="col">Duration (mins)</th>
+                    <th scope="col">Number of Players</th>
+                    <th scope="col">Tags</th>
+                </tr>
+                </tr>
+                {% for game in games %}
+                <tr>
+                    <td>
+                        <a href="{% url 'games:detail' game.name  %}">{{ game.name|capfirst }}</a>
+                    </td>
+                    <td> {{ game.game_weight }} </td>
+                    <td> {{ game.game_duration_mins|humaize_inclusive_range }} </td>
+                    <td> {{ game.range_of_players|humaize_inclusive_range }} </td>
+                    <td>
+                        <ul>
+                        {% for tag in game.tags.all %}
+                            <li> {{ tag }} </li>
+                        {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
                 {% endfor %}
-                </ul>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+            </table>
+        </div>
+    </div>
 {% endblock %}
