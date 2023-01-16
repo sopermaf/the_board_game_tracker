@@ -33,6 +33,7 @@ class BoardGameListView(FilterView):
     model = BoardGame
     context_object_name = "games"
     filterset_class = BoardGameFilter
+    paginate_by = 10
 
 
 class BoardGameDetailView(DetailView):

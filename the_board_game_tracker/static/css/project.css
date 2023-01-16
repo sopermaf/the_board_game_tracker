@@ -72,6 +72,7 @@ form > input[type="submit"] {
   margin: 2%;
 }
 
-p > input[type="text"] {
-  display: flexbox;
+.step-links {
+  text-align: center;
+  margin-top: 2em;
 }
