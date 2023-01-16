@@ -17,6 +17,7 @@ class BoardGameForm(ModelForm):
             "game_weight",
             "range_of_players",
             "game_duration_mins",
+            "price",
         ]
         widgets = {
             "played_by": CheckboxSelectMultiple,

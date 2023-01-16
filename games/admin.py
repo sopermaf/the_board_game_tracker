@@ -6,7 +6,13 @@ from .models import BoardGame, BoardGameTag
 
 @admin.register(BoardGame)
 class BoardGameAdmin(admin.ModelAdmin):
-    list_display = ["name", "game_weight", "range_of_players", "game_duration_mins"]
+    list_display = [
+        "name",
+        "game_weight",
+        "range_of_players",
+        "game_duration_mins",
+        "price",
+    ]
     form = BoardGameForm
 
 
