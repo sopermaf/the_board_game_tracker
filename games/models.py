@@ -1,8 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-from django.db.models import Func, Value
-from django.db.models.functions import Lower
+from django.db.models import Value
+from django.db.models.functions import Lower, Replace
 from django.urls import reverse
 from inclusive_django_range_fields import InclusiveIntegerRangeField
 
@@ -22,7 +22,7 @@ class BoardGameTag(models.Model):
 class BoardGameManager(models.Manager):
     def order_by_clean_name(self):
         return self.annotate(
-            name_without_the=Func(Lower("name"), Value("the "), function="TRIM")
+            name_without_the=Replace(Lower("name"), Value("the "), Value(""))
         ).order_by("name_without_the")
 
 

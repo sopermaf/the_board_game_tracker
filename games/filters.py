@@ -1,8 +1,8 @@
 from typing import Any
 
 from django.contrib.auth import get_user_model
-from django.db.models import Func, QuerySet, Value
-from django.db.models.functions import Lower
+from django.db.models import QuerySet, Value
+from django.db.models.functions import Lower, Replace
 from django.forms import SelectMultiple
 from django_filters import FilterSet, NumberFilter, RangeFilter
 from django_filters.filters import ModelMultipleChoiceFilter
@@ -57,7 +57,7 @@ class BoardGameFilter(FilterSet):
     def filter_queryset(self, queryset):
         qs = super().filter_queryset(queryset)
         qs = qs.annotate(
-            name_without_the=Func(Lower("name"), Value("the "), function="TRIM")
+            name_without_the=Replace(Lower("name"), Value("the "), Value(""))
         )
 
         return qs.order_by("name_without_the", "name")
