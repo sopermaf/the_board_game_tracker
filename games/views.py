@@ -34,6 +34,7 @@ class BoardGameListView(FilterView):
     context_object_name = "games"
     filterset_class = BoardGameFilter
     paginate_by = 10
+    queryset = BoardGame.objects.order_by_clean_name()
 
 
 class BoardGameDetailView(DetailView):

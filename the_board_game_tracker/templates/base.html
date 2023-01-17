@@ -104,11 +104,12 @@
       {% endblock content %}
 
       {% if page_obj %}
+      {% load games_extras %}
       <div class="row">
         <div class="col-sm-12 col-lg-11 step-links">
             {% if page_obj.has_previous %}
-                <a href="?page=1">&laquo; first</a>
-                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                <a href="?{% extend_querystring request page="1" %}">&laquo; first</a>
+                <a href="?{% extend_querystring request page=page_obj.previous_page_number %}">previous</a>
             {% endif %}
 
             <span class="current">
@@ -116,8 +117,8 @@
             </span>
 
             {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">next</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                <a href="?{% extend_querystring request page=page_obj.next_page_number %}">next</a>
+                <a href="?{% extend_querystring request page=page_obj.paginator.num_pages %}">last &raquo;</a>
             {% endif %}
         </div>
       </div>

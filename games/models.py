@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.db.models import Func, Value
+from django.db.models.functions import Lower
 from django.urls import reverse
 from inclusive_django_range_fields import InclusiveIntegerRangeField
 
@@ -15,6 +17,13 @@ class BoardGameTag(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+
+class BoardGameManager(models.Manager):
+    def order_by_clean_name(self):
+        return self.annotate(
+            name_without_the=Func(Lower("name"), Value("the "), function="TRIM")
+        ).order_by("name_without_the")
 
 
 class BoardGame(models.Model):
@@ -34,6 +43,8 @@ class BoardGame(models.Model):
         max_digits=5,
         validators=[MinValueValidator(0)],
     )
+
+    objects = BoardGameManager()
 
     class Meta:
         ordering = ["name"]
