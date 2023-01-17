@@ -46,9 +46,6 @@ class BoardGame(models.Model):
 
     objects = BoardGameManager()
 
-    class Meta:
-        ordering = ["name"]
-
     def __str__(self) -> str:
         return self.name
 
