@@ -13,6 +13,7 @@ class BoardGameAdmin(admin.ModelAdmin):
         "game_duration_mins",
         "price",
     ]
+    search_fields = ["name"]
     form = BoardGameForm
 
 
