@@ -40,6 +40,9 @@ $(".chosen-select").chosen({
                 <tr>
                     <td>
                         <a href="{% url 'games:detail' game.name  %}">{{ game.name|capfirst }}</a>
+                        {% if request.user.is_staff %}
+                        <a href="{% url 'admin:games_boardgame_change' game.pk %}" class="hidden-link">&#9999;</a>
+                        {% endif %}
                     </td>
                     <td> {{ game.game_weight }} </td>
                     <td> {{ game.game_duration_mins|humaize_inclusive_range }} </td>

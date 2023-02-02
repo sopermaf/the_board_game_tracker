@@ -76,3 +76,7 @@ form > input[type="submit"] {
   text-align: center;
   margin-top: 2em;
 }
+
+.hidden-link {
+  text-decoration:none;
+}
