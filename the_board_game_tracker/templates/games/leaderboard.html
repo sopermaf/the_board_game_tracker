@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block inline_javascript %}
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+{% endblock %}
+
+{% block content %}
+    <h1> Top 10 Players </h1>
+    <p> Total Players: {{ user_count }} </p>
+    <table>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Games Unplayed</th>
+          </tr>
+        </tr>
+        {% for user in users %}
+
+            <tr {% if forloop.first %}class="leaderboard_winner" {% endif %}>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>
+                    {% if forloop.first %} <i class='fas fa-crown'></i> {% endif %}
+                    {{ user.username|capfirst }}
+                </td>
+                <td>{{ user.number_unplayed_games }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

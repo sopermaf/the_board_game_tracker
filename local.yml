@@ -33,19 +33,3 @@ services:
       - the_board_game_tracker_local_postgres_data_backups:/backups
     env_file:
       - ./.envs/.local/.postgres
-
-  docs:
-    image: the_board_game_tracker_local_docs
-    container_name: the_board_game_tracker_local_docs
-    build:
-      context: .
-      dockerfile: ./compose/local/docs/Dockerfile
-    env_file:
-      - ./.envs/.local/.django
-    volumes:
-      - ./docs:/docs:z
-      - ./config:/app/config:z
-      - ./the_board_game_tracker:/app/the_board_game_tracker:z
-    ports:
-      - "9000:9000"
-    command: /start-docs
