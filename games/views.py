@@ -16,17 +16,12 @@ class LeaderBoard(ListView):
     template_name = "games/leaderboard.html"
     context_object_name = "users"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["user_count"] = User.objects.count()
-        return context
-
     def get_queryset(self) -> QuerySet:
         qs = super().get_queryset()
         total_board_games = BoardGame.objects.count()
         qs = qs.annotate(number_unplayed_games=total_board_games - Count("games"))
         qs = qs.order_by("number_unplayed_games", "username")
-        return qs[:10]
+        return qs
 
 
 class BoardGameListView(FilterView):
