@@ -15,7 +15,7 @@ $(".chosen-select").chosen({
 
 
 {% block content %}
-    <div class="row">
+    <div class="row mb-3 mt-2">
         <div class="col-sm-8 col-lg-5">
             <h2> Search </h2>
             <form action="" method="get">
@@ -25,7 +25,7 @@ $(".chosen-select").chosen({
         </div>
         <div class="col-lg-1">
         </div>
-        <div class="col-sm-8 col-lg-4">
+        <div class="col-sm-8 col-lg-4 mb-5">
             <h2> Games </h2>
             <table>
                 <tr>
@@ -36,26 +36,7 @@ $(".chosen-select").chosen({
                     <th scope="col">Tags</th>
                 </tr>
                 </tr>
-                {% for game in games %}
-                <tr>
-                    <td>
-                        <a href="{% url 'games:detail' game.name  %}">{{ game.name|capfirst }}</a>
-                        {% if request.user.is_staff %}
-                        <a href="{% url 'admin:games_boardgame_change' game.pk %}" class="hidden-link">&#9999;</a>
-                        {% endif %}
-                    </td>
-                    <td> {{ game.game_weight }} </td>
-                    <td> {{ game.game_duration_mins|humaize_inclusive_range }} </td>
-                    <td> {{ game.range_of_players|humaize_inclusive_range }} </td>
-                    <td>
-                        <ul>
-                        {% for tag in game.tags.all %}
-                            <li> {{ tag }} </li>
-                        {% endfor %}
-                        </ul>
-                    </td>
-                </tr>
-                {% endfor %}
+                {% include "games/boardgame_filter_table.html" %}
             </table>
         </div>
     </div>

@@ -32,6 +32,10 @@ class BoardGameListView(FilterView):
     queryset = BoardGame.objects.order_by_clean_name()
 
 
+class BoardGameListTable(BoardGameListView):
+    template_name = "games/boardgame_filter_table.html"
+
+
 class BoardGameDetailView(DetailView):
     model = BoardGame
     slug_field = "name"

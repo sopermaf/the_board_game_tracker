@@ -30,6 +30,7 @@
       <script defer src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
       <!-- Your stuff: Third-party javascript libraries go here -->
+      <script src="https://unpkg.com/htmx.org@1.8.5" integrity="sha384-7aHh9lqPYGYZ7sTHvzP1t3BAfLhYSTy9ArHdP3Xsr9/3TlGurYgcPBoFmXX2TX/w" crossorigin="anonymous"></script>
 
       <!-- place project specific Javascript in this file -->
       <script defer src="{% static 'js/project.js' %}"></script>
@@ -102,27 +103,6 @@
       {% block content %}
         <p>Use this document as a way to quick start any new project.</p>
       {% endblock content %}
-
-      {% if page_obj %}
-      {% load games_extras %}
-      <div class="row">
-        <div class="col-sm-12 col-lg-11 step-links">
-            {% if page_obj.has_previous %}
-                <a href="?{% extend_querystring request page="1" %}">&laquo; first</a>
-                <a href="?{% extend_querystring request page=page_obj.previous_page_number %}">previous</a>
-            {% endif %}
-
-            <span class="current">
-                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-            </span>
-
-            {% if page_obj.has_next %}
-                <a href="?{% extend_querystring request page=page_obj.next_page_number %}">next</a>
-                <a href="?{% extend_querystring request page=page_obj.paginator.num_pages %}">last &raquo;</a>
-            {% endif %}
-        </div>
-      </div>
-      {% endif %}
 
     </div> <!-- /container -->
 
