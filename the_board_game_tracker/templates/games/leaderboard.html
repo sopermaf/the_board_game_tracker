@@ -11,6 +11,7 @@
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Games Unplayed</th>
+            <th scope="col">Completed Weight</th>
           </tr>
         </tr>
         {% for user in users %}
@@ -22,6 +23,7 @@
                     {{ user.username|capfirst }}
                 </td>
                 <td>{{ user.number_unplayed_games }}</td>
+                <td>{{ user.completed_weight }}</td>
             </tr>
         {% endfor %}
     </table>
