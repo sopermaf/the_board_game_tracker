@@ -29,6 +29,9 @@ class BoardGameManager(models.Manager):
 class BoardGame(models.Model):
     name = models.CharField(primary_key=True, max_length=255)
     played_by = models.ManyToManyField(User, related_name="games", blank=True)
+    users_played_by = models.ManyToManyField(
+        User, related_name="games_played", blank=True, through="PlayedBoardGame"
+    )
     tags = models.ManyToManyField(BoardGameTag, related_name="games", blank=True)
     game_weight = models.DecimalField(
         decimal_places=2,
@@ -52,3 +55,19 @@ class BoardGame(models.Model):
     def get_absolute_url(self):
         # TODO: consider slug instead?
         return reverse("game:detail", kwargs={"name": self.name})
+
+
+class PlayedBoardGame(models.Model):
+    played_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    board_game = models.ForeignKey(BoardGame, on_delete=models.CASCADE)
+    date_played = models.DateField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=("played_by", "board_game"), name="unique played instance"
+            )
+        ]
+
+    def __str__(self) -> str:
+        return f"{self.played_by}:{self.board_game}"
