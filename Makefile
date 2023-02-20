@@ -5,7 +5,7 @@ build:
 	docker-compose -f $(COMPOSE_FILE) build
 
 migrate:
-	$(MAKE) django-migrate
+	$(MAKE) django-migrate $(args)
 
 # ensures all services are running
 runserver:
