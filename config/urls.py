@@ -18,7 +18,7 @@ urlpatterns = [
     path("users/", include("the_board_game_tracker.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
-    path("games/", include("games.urls")),
+    path("games/", include("games.urls", namespace="games")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

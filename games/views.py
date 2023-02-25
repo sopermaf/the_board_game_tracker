@@ -1,33 +1,19 @@
-from decimal import Decimal
-
-from django.contrib.auth import get_user_model
-from django.db.models import Count, F, QuerySet, Sum
-from django.db.models.functions import Coalesce
 from django.views.generic import DetailView, ListView
 from django_filters.views import FilterView
 
+from the_board_game_tracker.users.models import User
+
 from .filters import BoardGameFilter
 from .models import BoardGame
-
-User = get_user_model()
 
 
 class LeaderBoard(ListView):
     """Shows the top players with fewest remaining games"""
 
     model = User
+    queryset = User.objects.leaderboard()
     template_name = "games/leaderboard.html"
     context_object_name = "users"
-
-    def get_queryset(self) -> QuerySet:
-        qs = super().get_queryset()
-        total_board_games = BoardGame.objects.count()
-        qs = qs.annotate(number_unplayed_games=total_board_games - Count("games"))
-        qs = qs.annotate(
-            completed_weight=Sum(Coalesce(F("games__game_weight"), Decimal(0)))
-        )
-        qs = qs.order_by("number_unplayed_games", "username")
-        return qs
 
 
 class BoardGameListView(FilterView):

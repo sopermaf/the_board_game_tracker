@@ -5,7 +5,7 @@ build:
 	docker-compose -f $(COMPOSE_FILE) build
 
 migrate:
-	$(MAKE) django-migrate
+	$(MAKE) django-migrate $(args)
 
 # ensures all services are running
 runserver:
@@ -30,7 +30,7 @@ django-%:
 	docker-compose -f $(COMPOSE_FILE) run --rm django python manage.py $* $(args)
 
 test:
-	docker-compose -f $(COMPOSE_FILE) run django pytest --disable-warnings
+	docker-compose -f $(COMPOSE_FILE) run django pytest --disable-warnings $(args)
 
 teardown:
 	docker-compose -f $(COMPOSE_FILE) down
