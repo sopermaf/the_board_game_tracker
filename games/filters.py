@@ -22,7 +22,7 @@ multi_select = SelectMultiple(
 
 class BoardGameFilter(FilterSet):
     not_played_by = ModelMultipleChoiceFilter(
-        field_name="played_by",
+        field_name="users_played_by",
         exclude=True,
         queryset=User.objects.order_by("username"),
         widget=multi_select,

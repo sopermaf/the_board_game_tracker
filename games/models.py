@@ -29,9 +29,8 @@ class BoardGameManager(models.Manager):
 
 class BoardGame(models.Model):
     name = models.CharField(primary_key=True, max_length=255)
-    played_by = models.ManyToManyField(User, related_name="games", blank=True)
     users_played_by = models.ManyToManyField(
-        User, related_name="games_played", blank=True, through="PlayedBoardGame"
+        User, related_name="games_played", through="PlayedBoardGame"
     )
     tags = models.ManyToManyField(BoardGameTag, related_name="games", blank=True)
     game_weight = models.DecimalField(
