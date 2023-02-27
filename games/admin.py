@@ -13,6 +13,11 @@ class PlayedBoardGameAdmin(admin.ModelAdmin):
     form = PlayedBoardGameForm
 
 
+class PlayedGameInline(admin.TabularInline):
+    model = PlayedBoardGame
+    extra = 0
+
+
 @admin.register(BoardGame)
 class BoardGameAdmin(admin.ModelAdmin):
     list_display = [
@@ -25,6 +30,7 @@ class BoardGameAdmin(admin.ModelAdmin):
     list_per_page = 20
     search_fields = ["name"]
     form = BoardGameForm
+    inlines = [PlayedGameInline]
 
 
 @admin.register(BoardGameTag)
