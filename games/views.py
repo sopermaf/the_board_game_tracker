@@ -10,10 +10,12 @@ from .models import BoardGame
 class LeaderBoard(ListView):
     """Shows the top players with fewest remaining games"""
 
-    model = User
-    queryset = User.objects.leaderboard()
     template_name = "games/leaderboard.html"
     context_object_name = "users"
+
+    def get_queryset(self):
+        # NOTE: required here to avoid caching the board game total count
+        return User.objects.leaderboard()
 
 
 class BoardGameListView(FilterView):
