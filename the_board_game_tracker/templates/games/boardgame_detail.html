@@ -46,7 +46,7 @@
                     <th scope="row"> Played By </th>
                     <td>
                         <ul>
-                            {% for player in game.played_by.all %}
+                            {% for player in game.users_played_by.all %}
                                 <li> {{ player|capfirst }} </li>
                             {% empty %}
                                 Nobody!
