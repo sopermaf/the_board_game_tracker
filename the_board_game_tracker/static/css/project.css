@@ -79,4 +79,9 @@ form > input[type="submit"] {
 
 .hidden-link {
   text-decoration:none;
+  color: #000000;
+}
+
+.hidden-link :hover {
+  text-decoration: underline;
 }

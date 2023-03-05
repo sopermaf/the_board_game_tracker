@@ -35,7 +35,15 @@ document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() =
         {% for user in users %}
             <tr>
                 <th scope="row">{{ forloop.counter }} </th>
-                <td> {{ user.username|capfirst }}</td>
+                <td>
+                    {% if request.user.is_staff %}
+                        <a href="{% url 'admin:users_user_change' user.pk %}" class="hidden-link">
+                            {{ user.username|capfirst }}
+                        </a>
+                    {% else %}
+                        {{ user.username|capfirst }}
+                    {% endif %}
+                </td>
                 <td>
                     {{ user.number_unplayed_games }}
                     {% if user.is_hot %}
