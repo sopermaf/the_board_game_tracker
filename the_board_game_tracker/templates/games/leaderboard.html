@@ -38,12 +38,14 @@ document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() =
                 <td> {{ user.username|capfirst }}</td>
                 <td>
                     {{ user.number_unplayed_games }}
-                    {% if user.is_dead %}
-                        ☠️
-                    {% elif user.is_cold %}
-                        ❄️
-                    {% elif user.is_hot %}
-                      🔥
+                    {% if user.is_hot %}
+                        🔥
+                    {% elif  user.has_not_replayed_recently %}
+                        {% if user.is_dead  %}
+                            ☠️
+                        {% elif user.is_cold %}
+                            ❄️
+                        {% endif %}
                     {% endif %}
                 </td>
                 <td>{{ user.completed_weight }}</td>

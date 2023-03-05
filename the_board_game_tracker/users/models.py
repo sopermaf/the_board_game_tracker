@@ -2,13 +2,16 @@ from datetime import date, timedelta
 from decimal import Decimal
 
 from django.contrib.auth.models import AbstractUser, UserManager
-from django.db.models import CharField, Count, Exists, F, Max, OuterRef, Sum
+from django.db.models import CharField, Count, DateField, Exists, F, Max, OuterRef, Sum
 from django.db.models.functions import Coalesce
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from games.models import BoardGame, PlayedBoardGame
+
+_COLD_DAYS = 28
+_DEAD_DAYS = 90
 
 
 class BoardGameUserManager(UserManager):
@@ -24,8 +27,8 @@ class BoardGameUserManager(UserManager):
 
         qs = qs.annotate(
             is_hot=Exists(self._has_played_within(days_ago=14)),
-            is_cold=~Exists(self._has_played_within(days_ago=28)),
-            is_dead=~Exists(self._has_played_within(days_ago=90)),
+            is_cold=~Exists(self._has_played_within(days_ago=_COLD_DAYS)),
+            is_dead=~Exists(self._has_played_within(days_ago=_DEAD_DAYS)),
         )
         return qs.order_by("number_unplayed_games", "-most_recent_game", "username")
 
@@ -48,6 +51,10 @@ class User(AbstractUser):
     first_name = None  # type: ignore
     last_name = None  # type: ignore
 
+    # used to not punish players for replaying games
+    # by marking them as `cold` or `dead`
+    replayed_game_date = DateField(blank=True, null=True)
+
     objects = BoardGameUserManager()
 
     def get_absolute_url(self):
@@ -58,3 +65,7 @@ class User(AbstractUser):
 
         """
         return reverse("users:detail", kwargs={"username": self.username})
+
+    def has_not_replayed_recently(self) -> bool:
+        threshold_date = timezone.now().date() - timedelta(days=_COLD_DAYS)
+        return not self.replayed_game_date or self.replayed_game_date < threshold_date
