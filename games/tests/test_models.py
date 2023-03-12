@@ -10,9 +10,16 @@ from games.tests.factories import (
     UserWith2GamesPlayedFactory,
     UserWithGamePlayedFactory,
 )
-from the_board_game_tracker.users.models import User
+from the_board_game_tracker.users.models import LeaderBoardStates, User
+from the_board_game_tracker.users.tests.factories import UserFactory
 
+# NOTE: allows DB access by all tests in module
 pytestmark = pytest.mark.django_db
+
+TODAY = datetime.date.today()
+COLD_DATE = TODAY - datetime.timedelta(days=29)
+DEAD_DATE = TODAY - datetime.timedelta(days=91)
+NORMAL_DATE = TODAY - datetime.timedelta(days=15)
 
 
 def test_leaderboard_attributes():
@@ -57,3 +64,48 @@ def test_leaderboard_ordering_tie_breaker_name():
     bob = UserWith2GamesPlayedFactory(username="bob")
     alice = UserWith2GamesPlayedFactory(username="alice")
     assert list(User.objects.leaderboard()) == [alice, bob]
+
+
+@pytest.mark.parametrize(
+    "exp_status, dates_played",
+    [
+        (LeaderBoardStates.HOT, [TODAY]),
+        (LeaderBoardStates.HOT, [TODAY, NORMAL_DATE]),
+        (LeaderBoardStates.HOT, [TODAY, NORMAL_DATE, COLD_DATE, DEAD_DATE]),
+        (LeaderBoardStates.HOT, [TODAY, DEAD_DATE]),
+        (LeaderBoardStates.HOT, [TODAY, COLD_DATE]),
+        (LeaderBoardStates.NORMAL, [NORMAL_DATE]),
+        (LeaderBoardStates.NORMAL, [NORMAL_DATE, COLD_DATE, DEAD_DATE]),
+        (LeaderBoardStates.NORMAL, [NORMAL_DATE, DEAD_DATE]),
+        (LeaderBoardStates.NORMAL, [NORMAL_DATE, COLD_DATE]),
+        (LeaderBoardStates.COLD, [COLD_DATE]),
+        (LeaderBoardStates.COLD, [COLD_DATE, DEAD_DATE]),
+        (LeaderBoardStates.DEAD, [DEAD_DATE]),
+    ],
+)
+def test_leaderboard_markers(exp_status, dates_played):
+    """Only within the ranges of cold should it appear"""
+    user = UserFactory()
+    for date in dates_played:
+        PlayedBoardGameFactory(played_by=user, date_played=date)
+
+    assert User.objects.leaderboard()[0].status == exp_status
+
+
+@pytest.mark.parametrize(
+    "last_new, replayed_date, exp_status",
+    [
+        (TODAY, TODAY, LeaderBoardStates.HOT),
+        # will restore normal but not hot
+        (COLD_DATE, TODAY, LeaderBoardStates.NORMAL),
+        (DEAD_DATE, TODAY, LeaderBoardStates.NORMAL),
+        # will downgrade state
+        (DEAD_DATE, COLD_DATE, LeaderBoardStates.COLD),
+    ],
+)
+def test_leaderboard_markers_with_new_replayed(last_new, replayed_date, exp_status):
+    """Only within the ranges of cold should it appear"""
+    user = UserFactory(replayed_game_date=replayed_date)
+    PlayedBoardGameFactory(played_by=user, date_played=last_new)
+
+    assert User.objects.leaderboard()[0].status == exp_status

@@ -1,17 +1,26 @@
+import enum
 from datetime import date, timedelta
 from decimal import Decimal
 
 from django.contrib.auth.models import AbstractUser, UserManager
-from django.db.models import CharField, Count, DateField, Exists, F, Max, OuterRef, Sum
+from django.db.models import CharField, Count, DateField, F, Max, Sum
 from django.db.models.functions import Coalesce
 from django.urls import reverse
-from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from games.models import BoardGame, PlayedBoardGame
 
-_COLD_DAYS = 28
-_DEAD_DAYS = 90
+
+class LeaderBoardStates(enum.Enum):
+    HOT = "🔥", timedelta(days=14), False
+    NORMAL = "", timedelta(days=28), True
+    COLD = "🧊", timedelta(days=90), True
+    DEAD = "💀", None, True
+
+    def __init__(self, symbol, max_days_threshold, repeats_counted):
+        self.symbol = symbol
+        self.max_days_threshold = max_days_threshold
+        self.repeats_counted = repeats_counted
 
 
 class BoardGameUserManager(UserManager):
@@ -25,18 +34,7 @@ class BoardGameUserManager(UserManager):
         )
         qs = qs.annotate(most_recent_game=Max("playedboardgame__date_played"))
 
-        qs = qs.annotate(
-            is_hot=Exists(self._has_played_within(days_ago=14)),
-            is_cold=~Exists(self._has_played_within(days_ago=_COLD_DAYS)),
-            is_dead=~Exists(self._has_played_within(days_ago=_DEAD_DAYS)),
-        )
         return qs.order_by("number_unplayed_games", "-most_recent_game", "username")
-
-    def _has_played_within(self, days_ago: int) -> date:
-        return PlayedBoardGame.objects.filter(
-            played_by=OuterRef("pk"),
-            date_played__gte=timezone.now() - timedelta(days=days_ago),
-        )
 
 
 class User(AbstractUser):
@@ -66,6 +64,22 @@ class User(AbstractUser):
         """
         return reverse("users:detail", kwargs={"username": self.username})
 
-    def has_not_replayed_recently(self) -> bool:
-        threshold_date = timezone.now().date() - timedelta(days=_COLD_DAYS)
-        return not self.replayed_game_date or self.replayed_game_date < threshold_date
+    @property
+    def status(self):
+        date_played = PlayedBoardGame.objects.filter(played_by=self)[:1][0].date_played
+        new_game_played = date.today() - date_played
+
+        for state in LeaderBoardStates:
+            if (
+                state.max_days_threshold is None
+                or new_game_played < state.max_days_threshold
+                or (
+                    state.repeats_counted
+                    and self.replayed_game_date
+                    and date.today() - self.replayed_game_date
+                    < state.max_days_threshold
+                )
+            ):
+                return state
+
+        raise ValueError("something went wrong")
