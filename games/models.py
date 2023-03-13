@@ -1,3 +1,5 @@
+import urllib.parse
+
 from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
@@ -58,6 +60,11 @@ class BoardGame(models.Model):
     def get_absolute_url(self):
         # TODO: consider slug instead?
         return reverse("games:detail", kwargs={"name": self.name})
+
+    @property
+    def external_link(self):
+        encoded_name = urllib.parse.quote(self.name)
+        return f"https://boardgamegeek.com/geeksearch.php?action=search&q={encoded_name}&objecttype=boardgame"
 
 
 class PlayedBoardGame(models.Model):
