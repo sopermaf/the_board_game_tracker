@@ -1,10 +1,19 @@
 {% extends "base.html" %}
 
-{% load games_extras %}
+{% load games_extras static %}
 
 {% block content %}
     <div class="row">
         <div class="col-sm-12 col-lg-6">
+            <div>
+                {% with "images/"|add:game.name.lower|add:".webp" as image %}
+                    <img
+                        src="{% static image %}"
+                        class="profile-image"
+                        onerror="this.style.display='none'"
+                    >
+                {% endwith %}
+            </div>
             <h2>
                 {{ game.name|capfirst }}
 

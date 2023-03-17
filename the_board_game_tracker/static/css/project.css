@@ -85,3 +85,13 @@ form > input[type="submit"] {
 .hidden-link :hover {
   text-decoration: underline;
 }
+
+.icon {
+  height: 50px;
+  width: 50px;
+}
+
+.profile-image {
+  height: 100px;
+  width: 100px;
+}
