@@ -8,7 +8,8 @@
             <div>
                 {% with "images/"|add:game.name.lower|add:".webp" as image %}
                     <img
-                        src="{% static image %}"
+                        {% comment %} src="{% static image %}" {% endcomment %}
+                        src="{{ game.image_src }}"
                         class="profile-image"
                         onerror="this.style.display='none'"
                     >

@@ -1,5 +1,7 @@
 import urllib.parse
 
+import requests
+from bs4 import BeautifulSoup
 from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
@@ -10,6 +12,10 @@ from django.utils import timezone
 from inclusive_django_range_fields import InclusiveIntegerRangeField
 
 User = settings.AUTH_USER_MODEL
+
+
+class ScrapingParseError(Exception):
+    """Used for attempts to scrape websites that fail"""
 
 
 class BoardGameTag(models.Model):
@@ -48,6 +54,8 @@ class BoardGame(models.Model):
         max_digits=5,
         validators=[MinValueValidator(0)],
     )
+    image_src = models.CharField(max_length=500, null=True, blank=True)
+    board_game_geek_id = models.CharField(max_length=100, null=True, blank=True)
 
     objects = BoardGameManager()
 
@@ -65,6 +73,27 @@ class BoardGame(models.Model):
     def external_link(self):
         encoded_name = urllib.parse.quote(self.name)
         return f"https://boardgamegeek.com/geeksearch.php?action=search&q={encoded_name}&objecttype=boardgame"
+
+    def scrape_boardgamegeek_img_src(self) -> str:
+        """
+        Scrapes image from board game geek and sets the `image_src`
+
+        Raises HttpError if the request fails or ParseError for bad parsing results
+        """
+        # get the information from board game geek search page
+        resp = requests.get(self.external_link)
+        resp.raise_for_status()
+
+        # parses the thumbnail as the first result from the search page
+        soup = BeautifulSoup(resp.content, "html.parser")
+
+        try:
+            thumbnail_td = soup.find_all("td", class_="collection_thumbnail")[0]
+            img_src = thumbnail_td.find_all("img")[0].attrs["src"]
+        except Exception:
+            raise ScrapingParseError
+
+        return img_src
 
 
 class PlayedBoardGame(models.Model):

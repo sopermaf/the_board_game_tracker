@@ -10,7 +10,8 @@
 {% endif %}
     <td>
         {% with "images/"|add:game.name.lower|add:".webp" as image %}
-            <img src="{% static image %}" class="icon" onerror="this.style.display='none'">
+            {% comment %} <img src="{% static image %}" class="icon" onerror="this.style.display='none'"> {% endcomment %}
+            <img src="{{ game.image_src }}" class="icon" onerror="this.style.display='none'">
         {% endwith %}
     </td>
     <td>
