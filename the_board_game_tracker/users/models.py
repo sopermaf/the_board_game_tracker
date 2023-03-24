@@ -66,8 +66,12 @@ class User(AbstractUser):
 
     @property
     def status(self):
-        date_played = PlayedBoardGame.objects.filter(played_by=self)[:1][0].date_played
-        new_game_played = date.today() - date_played
+        most_recently_played = PlayedBoardGame.objects.filter(played_by=self).first()
+        if not most_recently_played:
+            # you've never played a game so can't be alive
+            return LeaderBoardStates.DEAD
+
+        new_game_played = date.today() - most_recently_played.date_played
 
         for state in LeaderBoardStates:
             if (
