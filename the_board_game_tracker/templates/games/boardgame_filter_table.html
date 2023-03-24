@@ -1,4 +1,4 @@
-{% load games_extras static %}
+{% load games_extras %}
 
 {% for game in games %}
 {% if forloop.last and page_obj.has_next %}
@@ -9,10 +9,9 @@
 <tr>
 {% endif %}
     <td>
-        {% with "images/"|add:game.name.lower|add:".webp" as image %}
-            {% comment %} <img src="{% static image %}" class="icon" onerror="this.style.display='none'"> {% endcomment %}
-            <img src="{{ game.image_src }}" class="icon" onerror="this.style.display='none'">
-        {% endwith %}
+        {% if game.image_src %}
+            <img src="{{ game.image_src }}" class="icon">
+        {% endif %}
     </td>
     <td>
         <a href="{% url 'games:detail' game.name  %}">{{ game.name|capfirst }}</a>
