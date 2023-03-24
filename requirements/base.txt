@@ -5,8 +5,8 @@ argon2-cffi==21.3.0  # https://github.com/hynek/argon2_cffi
 whitenoise==6.2.0  # https://github.com/evansd/whitenoise
 redis==4.4.0  # https://github.com/redis/redis-py
 hiredis==2.1.0  # https://github.com/redis/hiredis-py
-beautifulsoup4
-requests
+beautifulsoup4=4.11.2
+requests==2.28.1
 
 # Django
 # ------------------------------------------------------------------------------
