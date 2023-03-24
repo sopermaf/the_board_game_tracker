@@ -5,8 +5,8 @@ argon2-cffi==21.3.0  # https://github.com/hynek/argon2_cffi
 whitenoise==6.2.0  # https://github.com/evansd/whitenoise
 redis==4.4.0  # https://github.com/redis/redis-py
 hiredis==2.1.0  # https://github.com/redis/hiredis-py
-django-filter==22.1
-inclusive-django-range-fields==0.2.3
+beautifulsoup4=4.11.2
+requests==2.28.1
 
 # Django
 # ------------------------------------------------------------------------------
@@ -17,3 +17,5 @@ django-allauth==0.51.0  # https://github.com/pennersr/django-allauth
 django-crispy-forms==1.14.0  # https://github.com/django-crispy-forms/django-crispy-forms
 crispy-bootstrap5==0.7  # https://github.com/django-crispy-forms/crispy-bootstrap5
 django-redis==5.2.0  # https://github.com/jazzband/django-redis
+django-filter==22.1
+inclusive-django-range-fields==0.2.3

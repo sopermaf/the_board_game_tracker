@@ -9,6 +9,11 @@
 <tr>
 {% endif %}
     <td>
+        {% if game.image_src %}
+            <img src="{{ game.image_src }}" class="icon">
+        {% endif %}
+    </td>
+    <td>
         <a href="{% url 'games:detail' game.name  %}">{{ game.name|capfirst }}</a>
         {% if request.user.is_staff %}
         <a href="{% url 'admin:games_boardgame_change' game.pk %}" class="hidden-link">&#9999;</a>

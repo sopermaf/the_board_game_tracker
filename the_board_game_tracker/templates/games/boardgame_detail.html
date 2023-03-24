@@ -5,6 +5,12 @@
 {% block content %}
     <div class="row">
         <div class="col-sm-12 col-lg-6">
+            {% if game.image_src %}
+                <div>
+                    <img src="{{ game.image_src }}" class="profile-image">
+                </div>
+            {% endif %}
+
             <h2>
                 {{ game.name|capfirst }}
 
