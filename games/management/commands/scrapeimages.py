@@ -10,7 +10,7 @@ class Command(BaseCommand):
     help = "Scrapes images from boardgamegeek if possible"
 
     def handle(self, *args, **options):
-        qs = BoardGame.objects.filter(image_src__isnull=True)
+        qs = BoardGame.objects.filter(image_src="")
         for board_game in qs:
             self._handle_game(board_game)
 
@@ -21,7 +21,7 @@ class Command(BaseCommand):
             self.stdout.write(
                 self.style.ERROR("request error %s. Sleeping..." % board_game.name)
             )
-            time.sleep(5)
+            time.sleep(30)
         except ScrapingParseError:
             self.stdout.write(
                 self.style.ERROR('Failed to parse image "%s"' % board_game.name)
@@ -30,3 +30,5 @@ class Command(BaseCommand):
             self.stdout.write(
                 self.style.SUCCESS('Successfully found image "%s"' % board_game.name)
             )
+            # minor delay magic number to avoid rate limiting
+            time.sleep(0.3)

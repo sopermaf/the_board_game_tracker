@@ -32,9 +32,9 @@ class HasImageFilter(admin.SimpleListFilter):
     def queryset(self, request, queryset):
         value = self.value()
         if value == "Yes":
-            return queryset.exclude(image_src__isnull=True)
+            return queryset.exclude(image_src="")
         elif value == "No":
-            return queryset.filter(image_src__isnull=True)
+            return queryset.filter(image_src="")
         return queryset
 
 

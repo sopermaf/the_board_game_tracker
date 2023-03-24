@@ -54,8 +54,8 @@ class BoardGame(models.Model):
         max_digits=5,
         validators=[MinValueValidator(0)],
     )
-    image_src = models.CharField(max_length=500, null=True, blank=True)
-    board_game_geek_id = models.CharField(max_length=100, null=True, blank=True)
+    image_src = models.CharField(max_length=500, blank=True)
+    board_game_geek_id = models.CharField(max_length=100, blank=True)
 
     objects = BoardGameManager()
 
