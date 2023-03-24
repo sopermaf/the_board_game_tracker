@@ -61,15 +61,14 @@ class BoardGameAdmin(admin.ModelAdmin):
         # does not time out
         updated = []
         for game in queryset:
-            game.image_src = game.scrape_boardgamegeek_img_src()
-            game.save()
+            game.scrape_boardgamegeek_img_src()
             updated.append(game)
 
         self.message_user(
             request,
             ngettext(
-                "%d story was successfully marked as published.",
-                "%d stories were successfully marked as published.",
+                "%d image was successfully scraped.",
+                "%d images were successfully scraped.",
                 len(updated),
             )
             % len(updated),

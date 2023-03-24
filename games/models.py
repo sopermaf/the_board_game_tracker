@@ -71,17 +71,19 @@ class BoardGame(models.Model):
 
     @property
     def external_link(self):
-        encoded_name = urllib.parse.quote(self.name)
-        return f"https://boardgamegeek.com/geeksearch.php?action=search&q={encoded_name}&objecttype=boardgame"
+        return f"https://boardgamegeek.com/{self.board_game_geek_id}"
 
     def scrape_boardgamegeek_img_src(self) -> str:
         """
-        Scrapes image from board game geek and sets the `image_src`
+        Scrapes image from board game geek and sets the `image_src` and `board_game_geek_ids`
 
         Raises HttpError if the request fails or ParseError for bad parsing results
         """
         # get the information from board game geek search page
-        resp = requests.get(self.external_link)
+        encoded_name = urllib.parse.quote(self.name)
+        resp = requests.get(
+            f"https://boardgamegeek.com/geeksearch.php?action=search&q={encoded_name}&objecttype=boardgame"
+        )
         resp.raise_for_status()
 
         # parses the thumbnail as the first result from the search page
@@ -89,11 +91,12 @@ class BoardGame(models.Model):
 
         try:
             thumbnail_td = soup.find_all("td", class_="collection_thumbnail")[0]
-            img_src = thumbnail_td.find_all("img")[0].attrs["src"]
+            self.image_src = thumbnail_td.find_all("img")[0].attrs["src"]
+            self.board_game_geek_id = thumbnail_td.find_all("a")[0].attrs["href"]
         except Exception:
             raise ScrapingParseError
-
-        return img_src
+        else:
+            self.save()
 
 
 class PlayedBoardGame(models.Model):
