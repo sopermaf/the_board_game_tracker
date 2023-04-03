@@ -59,11 +59,11 @@ DJANGO_APPS = [
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # "django.contrib.humanize", # Handy template tags
+    "django.contrib.admin",
     "django.forms",
 ]
 THIRD_PARTY_APPS = [
-    "material",
-    "material.admin",
     "crispy_forms",
     "crispy_bootstrap5",
     "allauth",
@@ -273,21 +273,3 @@ SOCIALACCOUNT_FORMS = {
 
 # Your stuff...
 # ------------------------------------------------------------------------------
-
-MATERIAL_ADMIN_SITE = {
-    "HEADER": "FabianBoardGameTable.quest",
-    "TITLE": "FabianBoardGameTable",
-    "SHOW_THEMES": True,
-    "NAVBAR_REVERSE": True,
-    "SHOW_COUNTS": True,
-    "APP_ICONS": {
-        "sites": "send",
-        "games": "apps",
-    },
-    "MODEL_ICONS": {
-        "site": "contact_mail",
-        "boardgametag": "description",
-        "boardgame": "dashboard",
-        "playedboardgame": "checklist",
-    },
-}
