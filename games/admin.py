@@ -1,3 +1,5 @@
+import contextlib
+
 from django.contrib import admin, messages
 from django.utils.translation import ngettext
 
@@ -55,6 +57,17 @@ class BoardGameAdmin(admin.ModelAdmin):
     inlines = [PlayedGameInline]
     actions = ["scrape_boardgamegeek_images"]
 
+    def save_model(self, request, obj: BoardGame, form, change) -> None:
+        # NOTE: scrape images for newly created games within Admin
+        # flow only as an easier flow compared to overriding the
+        # the model save
+        if not change and not obj.image_src:
+            # we don't want to cause exceptions for the admin page
+            with contextlib.suppress(Exception):
+                obj.scrape_boardgamegeek_img_src()
+
+        return super().save_model(request, obj, form, change)
+
     @admin.action(description="Scrape boardgamegeek image sources")
     def scrape_boardgamegeek_images(self, request, queryset):
         # TODO: reimplement as a background job to ensure the request
@@ -75,7 +88,7 @@ class BoardGameAdmin(admin.ModelAdmin):
             messages.SUCCESS,
         )
 
-    def has_image(self, obj):
+    def has_image(self, obj: BoardGame):
         return bool(obj.image_src)
 
     has_image.boolean = True
