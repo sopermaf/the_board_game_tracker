@@ -4,7 +4,13 @@ from django.contrib.auth import get_user_model
 from django.db.models import QuerySet, Value
 from django.db.models.functions import Lower, Replace
 from django.forms import SelectMultiple
-from django_filters import FilterSet, NumberFilter, RangeFilter
+from django_filters import (
+    CharFilter,
+    FilterSet,
+    NumberFilter,
+    OrderingFilter,
+    RangeFilter,
+)
 from django_filters.filters import ModelMultipleChoiceFilter
 from psycopg2.extras import NumericRange
 
@@ -18,6 +24,24 @@ multi_select = SelectMultiple(
         "data-placeholder": "begin typing...",
     }
 )
+
+
+class GameNameOrderedDefault(OrderingFilter):
+    """
+    Reimplementation of OrderingFilter to use the `name` by default
+    """
+
+    def filter(self, qs: QuerySet, value):
+        if value:
+            orderings = [self.get_ordering_value(param) for param in value if param]
+        else:
+            orderings = []
+
+        qs = qs.annotate(
+            name_without_the=Replace(Lower("name"), Value("the "), Value(""))
+        )
+
+        return qs.order_by(*orderings, "name_without_the")
 
 
 class BoardGameFilter(FilterSet):
@@ -38,13 +62,12 @@ class BoardGameFilter(FilterSet):
     range_of_players = NumberFilter(
         method="int_within_range", label="Number of Players"
     )
+    order_games = GameNameOrderedDefault(fields=("game_weight", "game_duration_mins"))
+    name = CharFilter(field_name="name", lookup_expr="icontains")
 
     class Meta:
         model = BoardGame
-        fields = [
-            "tags",
-            "not_played_by",
-        ]
+        fields = ["tags", "not_played_by", "name"]
 
     def int_within_range(self, queryset: QuerySet, name: str, value: int):
         return queryset.filter(**{f"{name}__contains": NumericRange(value, value + 1)})
@@ -53,11 +76,3 @@ class BoardGameFilter(FilterSet):
         for v in value:
             qs = qs.filter(**{f"{name}__in": [v]})
         return qs
-
-    def filter_queryset(self, queryset):
-        qs = super().filter_queryset(queryset)
-        qs = qs.annotate(
-            name_without_the=Replace(Lower("name"), Value("the "), Value(""))
-        )
-
-        return qs.order_by("name_without_the", "name")
