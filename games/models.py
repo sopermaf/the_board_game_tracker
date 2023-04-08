@@ -101,7 +101,7 @@ class BoardGame(models.Model):
 
 
 class PlayedBoardGameManager(models.Manager):
-    def recently_played(self):
+    def newly_played_updates(self):
         return (
             self.values("date_played", "board_game")
             .annotate(

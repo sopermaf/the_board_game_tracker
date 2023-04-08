@@ -1,4 +1,5 @@
 import datetime
+import itertools
 
 import pytest
 from freezegun import freeze_time
@@ -114,3 +115,36 @@ def test_leaderboard_markers_with_new_replayed(last_new, replayed_date, exp_stat
     PlayedBoardGameFactory(played_by=user, date_played=last_new)
 
     assert User.objects.leaderboard()[0].status == exp_status
+
+
+def test_played_games_updates():
+    # ensure done per day and per game
+    # 2 games, over 3 days should be 6 entries total
+    catan = BoardGameFactory(name="catan")
+    cards = BoardGameFactory(name="cards")
+
+    joe = UserFactory(username="joe")
+    jack = UserFactory(username="jack")
+    john = UserFactory(username="john")
+
+    # Joe and John have a games session and play 2 games
+    for user, game in itertools.product([joe, john], [cards, catan]):
+        PlayedBoardGameFactory(played_by=user, board_game=game, date_played=TODAY)
+
+    # Joe and Jack play one game another day which is new for Jack
+    PlayedBoardGameFactory(played_by=jack, board_game=cards, date_played=COLD_DATE)
+
+    updates_qs = models.PlayedBoardGame.objects.newly_played_updates()
+    assert list(updates_qs) == [
+        {
+            "date_played": TODAY,
+            "board_game": cards.name,
+            "players": ", ".join(p.username for p in (joe, john)),
+        },
+        {
+            "date_played": TODAY,
+            "board_game": catan.name,
+            "players": ", ".join(p.username for p in (joe, john)),
+        },
+        {"date_played": COLD_DATE, "board_game": cards.name, "players": jack.username},
+    ]
