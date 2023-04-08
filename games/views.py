@@ -4,7 +4,7 @@ from django_filters.views import FilterView
 from the_board_game_tracker.users.models import User
 
 from .filters import BoardGameFilter
-from .models import BoardGame
+from .models import BoardGame, PlayedBoardGame
 
 
 class LeaderBoard(ListView):
@@ -16,6 +16,11 @@ class LeaderBoard(ListView):
     def get_queryset(self):
         # NOTE: required here to avoid caching the board game total count
         return User.objects.leaderboard()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["recent_newly_played"] = PlayedBoardGame.objects.newly_played_updates()
+        return context
 
 
 class BoardGameListView(FilterView):
@@ -35,3 +40,12 @@ class BoardGameDetailView(DetailView):
     slug_field = "name"
     slug_url_kwarg = "name"
     context_object_name = "game"
+
+
+class PlayedGamesListView(ListView):
+    model = PlayedBoardGame
+    context_object_name = "new_game_day"
+    template_name = "games/new_played_updates.html"
+
+    def get_queryset(self):
+        return PlayedBoardGame.objects.newly_played_updates()

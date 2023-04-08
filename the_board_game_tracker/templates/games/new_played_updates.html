@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row mb-3 mt-2">
+        <div class="col-sm-3">
+            <h2> Latest Played Games </h2>
+        </div>
+    </div>
+
+    <div class="row mb-3 mt-2">
+        <div class="col-sm-3">
+            <table>
+                <tr>
+                    <th scope="col">Day</th>
+                    <th scope="col">Game</th>
+                    <th scope="col">Whoe</th>
+                </tr>
+                </tr>
+                    {% for played_day in new_game_day %}
+                    <tr>
+                        <td> {{ played_day.date_played }} </td>
+                        <td> {{ played_day.board_game }} </td>
+                        <td> {{ played_day.players }} </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

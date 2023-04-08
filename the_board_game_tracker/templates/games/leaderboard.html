@@ -23,34 +23,68 @@ document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() =
 {% endblock %}
 
 {% block content %}
-    <h2> Player Ranking </h2>
-    <table>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Games Unplayed</th>
-            <th scope="col">Completed Weight</th>
-          </tr>
-        </tr>
-        {% for user in users %}
-            <tr>
-                <th scope="row">{{ forloop.counter }} </th>
-                <td>
-                    {% if request.user.is_staff %}
-                        <a href="{% url 'admin:users_user_change' user.pk %}" class="hidden-link">
-                            {{ user.username|capfirst }}
-                        </a>
-                    {% else %}
-                        {{ user.username|capfirst }}
-                    {% endif %}
-                </td>
-                <td>
-                    {{ user.number_unplayed_games }}
-                    {{ user.status.symbol }}
-                </td>
-                <td>{{ user.completed_weight }}</td>
-            </tr>
-        {% endfor %}
-    </table>
+    <div class="row mb-3 mt-2">
+        <div class="col-sm-3">
+            <h2> Player Ranking </h2>
+        </div>
+    </div>
 
+    <div class="row mb-3 mt-2">
+        <div class="col-sm-3">
+            <table>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Games Unplayed</th>
+                    <th scope="col">Completed Weight</th>
+                </tr>
+                </tr>
+                {% for user in users %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }} </th>
+                        <td>
+                            {% if request.user.is_staff %}
+                                <a href="{% url 'admin:users_user_change' user.pk %}" class="hidden-link">
+                                    {{ user.username|capfirst }}
+                                </a>
+                            {% else %}
+                                {{ user.username|capfirst }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ user.number_unplayed_games }}
+                            {{ user.status.symbol }}
+                        </td>
+                        <td>{{ user.completed_weight }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <div class="row mb-3 mt-2">
+        <div class="col-sm-3">
+            <h2> Latest Played Games </h2>
+        </div>
+    </div>
+
+    <div class="row mb-3 mt-2">
+        <div class="col-sm-3">
+            <table>
+                <tr>
+                    <th scope="col">Day</th>
+                    <th scope="col">Game</th>
+                    <th scope="col">Whoe</th>
+                </tr>
+                </tr>
+                    {% for played_day in recent_newly_played %}
+                    <tr>
+                        <td> {{ played_day.date_played }} </td>
+                        <td> {{ played_day.board_game }} </td>
+                        <td> {{ played_day.players }} </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
 {% endblock %}
