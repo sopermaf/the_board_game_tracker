@@ -28,6 +28,28 @@
         rows.forEach(row => tbody.appendChild(row));
       });
     })
+    new Morris.Bar({
+        // ID of the element in which to draw the chart.
+        element: 'myfirstchart',
+        // Chart data records -- each entry in this array corresponds to a point on
+        // the chart.
+        stacked: true,
+        data: [
+        { player: 'ferdia', games_played: 20 },
+        { player: 'rob', games_played: 20 },
+        { player: 'enya', games_played: 10 },
+        { player: 'fabian', games_played: 5 },
+        { player: 'ryan', games_played: 5 }
+        ],
+        // The name of the data record attribute that contains x-values.
+        xkey: 'player',
+        // A list of names of data record attributes that contain y-values.
+        ykeys: ['games_played'],
+        // Labels for the ykeys -- will be displayed when you hover over the
+        // chart.
+        labels: ['Games Played']
+    });
+
 </script>
 
 {% endblock %}
@@ -122,5 +144,12 @@
             </div>
         </div>
 
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div id="myfirstchart" style=""></div>
+        </div>
     </div>
 {% endblock %}
