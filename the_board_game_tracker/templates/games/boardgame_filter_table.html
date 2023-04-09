@@ -1,13 +1,14 @@
 {% load games_extras %}
 
 {% for game in games %}
-{% if forloop.last and page_obj.has_next %}
-<tr hx-get="/games/table/?{% extend_querystring request page=page_obj.next_page_number %}"
+<tr
+    class="{% cycle 'row-1' 'row-2' %}"
+    {% if forloop.last and page_obj.has_next %}
+    hx-get="/games/table/?{% extend_querystring request page=page_obj.next_page_number %}"
     hx-trigger="intersect once"
-    hx-swap="afterend">
-{% else %}
-<tr>
-{% endif %}
+    hx-swap="afterend"
+    {% endif %}
+>
     <td>
         {% if game.image_src %}
             <img src="{{ game.image_src }}" class="icon">

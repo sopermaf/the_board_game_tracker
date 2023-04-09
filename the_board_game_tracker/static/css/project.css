@@ -25,7 +25,8 @@ table {
 
 /* Spacing */
 td, th {
-  border: 1px solid #999;
+  border: 0px;
+  border-top: 1px solid #999;
   padding: 20px;
 }
 
@@ -103,4 +104,13 @@ form > input[type="submit"] {
 
 .updates-games {
   font-style: italic;
+}
+
+/* Used for alternating rows to make tables interesting */
+.row-1 {
+  background-color: rgb(255, 255, 255);
+}
+
+.row-2 {
+  background-color: #e6e6e6;
 }

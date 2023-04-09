@@ -37,7 +37,7 @@ document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() =
                 </tr>
                 </tr>
                 {% for user in users %}
-                    <tr>
+                    <tr class={% cycle 'row-1' 'row-2' %}>
                         <th scope="row">{{ forloop.counter }} </th>
                         <td>
                             {% if request.user.is_staff %}
@@ -64,7 +64,7 @@ document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() =
             <table>
                 {% regroup recent_newly_played by date_played as updates_list %}
                 {% for update in updates_list %}
-                    <tr>
+                    <tr class={% cycle 'row-1' 'row-2' %}>
                         <td> {{ update.grouper }} </td>
                         <td>
                             <ul>
