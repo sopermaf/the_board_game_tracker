@@ -3,6 +3,7 @@ import urllib.parse
 import requests
 from bs4 import BeautifulSoup
 from django.conf import settings
+from django.contrib.postgres.aggregates import StringAgg
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models import Value
@@ -99,10 +100,27 @@ class BoardGame(models.Model):
             self.save()
 
 
+class PlayedBoardGameManager(models.Manager):
+    def newly_played_updates(self):
+        return (
+            self.values("date_played", "played_by__username")
+            .annotate(
+                games=StringAgg(
+                    "board_game",
+                    delimiter=", ",
+                    ordering="board_game",
+                )
+            )
+            .order_by("-date_played", "played_by__username")
+        )
+
+
 class PlayedBoardGame(models.Model):
     played_by = models.ForeignKey(User, on_delete=models.CASCADE)
     board_game = models.ForeignKey(BoardGame, on_delete=models.CASCADE)
     date_played = models.DateField(default=timezone.now)
+
+    objects = PlayedBoardGameManager()
 
     class Meta:
         constraints = [

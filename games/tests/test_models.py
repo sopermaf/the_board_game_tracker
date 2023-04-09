@@ -114,3 +114,39 @@ def test_leaderboard_markers_with_new_replayed(last_new, replayed_date, exp_stat
     PlayedBoardGameFactory(played_by=user, date_played=last_new)
 
     assert User.objects.leaderboard()[0].status == exp_status
+
+
+def test_played_games_updates():
+    # ensure done per day and per game
+    # 2 games, over 3 days should be 6 entries total
+    catan = BoardGameFactory(name="catan")
+    cards = BoardGameFactory(name="cards")
+
+    jack = UserFactory(username="jack")
+    joe = UserFactory(username="joe")
+
+    PlayedBoardGameFactory(played_by=jack, board_game=cards, date_played=COLD_DATE)
+
+    # Joe and John have a games session and play 2 games
+    for user in [joe, jack]:
+        PlayedBoardGameFactory(played_by=user, board_game=catan, date_played=TODAY)
+    PlayedBoardGameFactory(played_by=joe, board_game=cards, date_played=TODAY)
+
+    updates_qs = models.PlayedBoardGame.objects.newly_played_updates()
+    assert list(updates_qs) == [
+        {
+            "date_played": TODAY,
+            "games": catan.name,
+            "played_by__username": jack.username,
+        },
+        {
+            "date_played": TODAY,
+            "games": ", ".join(g.name for g in (cards, catan)),
+            "played_by__username": joe.username,
+        },
+        {
+            "date_played": COLD_DATE,
+            "games": cards.name,
+            "played_by__username": jack.username,
+        },
+    ]
