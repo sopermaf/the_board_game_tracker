@@ -95,3 +95,12 @@ form > input[type="submit"] {
   height: 100px;
   width: 100px;
 }
+
+.updates-player {
+  text-decoration: underline;
+  /* font-style: oblique; */
+}
+
+.updates-games {
+  font-style: italic;
+}

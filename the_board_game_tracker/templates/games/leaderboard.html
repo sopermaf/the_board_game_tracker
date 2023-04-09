@@ -59,23 +59,26 @@ document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() =
         </div>
 
         <div class="col-sm-12 col-lg-5  mb-3 mt-2">
-            <h2> Latest New Games Updates </h2>
+            <h2> Latest Updates </h2>
 
-                <table>
+            <table>
+                {% regroup recent_newly_played by date_played as updates_list %}
+                {% for update in updates_list %}
                     <tr>
-                        <th scope="col">Day</th>
-                        <th scope="col">Game</th>
-                        <th scope="col">Whoe</th>
+                        <td> {{ update.grouper }} </td>
+                        <td>
+                            <ul>
+                                {% for player in update.list %}
+                                <li>
+                                    <span class="updates-player"> {{ player.played_by__username|title }}:</span>
+                                    <span class="updates-games"> {{ player.games }} </span>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </td>
                     </tr>
-                    </tr>
-                        {% for played_day in recent_newly_played %}
-                        <tr>
-                            <td> {{ played_day.date_played }} </td>
-                            <td> {{ played_day.played_by__username|title }} </td>
-                            <td> {{ played_day.games|title }} </td>
-                        </tr>
-                    {% endfor %}
-                </table>
+                {% endfor %}
+            </table>
             </div>
         </div>
     </div>

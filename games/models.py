@@ -1,4 +1,5 @@
 import urllib.parse
+from datetime import date, timedelta
 
 import requests
 from bs4 import BeautifulSoup
@@ -112,6 +113,7 @@ class PlayedBoardGameManager(models.Manager):
                 )
             )
             .order_by("-date_played", "played_by__username")
+            .filter(date_played__gte=date.today() - timedelta(days=30))
         )
 
 
