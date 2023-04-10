@@ -1,5 +1,25 @@
 /* These styles are generated from project.scss. */
 
+.main-content {
+  background: url("/static/images/fabian_drawing.png") no-repeat;
+  background-repeat: space;
+  background-position: center;
+  background-size: 30%;
+}
+
+form {
+  background-color: rgba(255, 255, 255, 0.819);
+}
+
+h2 {
+  color: white;
+  text-shadow:
+      0.04em 0 black,
+      0 0.04em black,
+      -0.04em 0 black,
+      0 -0.04em black;
+}
+
 .alert-debug {
   color: black;
   background-color: white;
@@ -20,7 +40,7 @@ table {
   text-align: left;
   position: relative;
   border-collapse: collapse;
-  background-color: #f6f6f6;
+  backdrop-filter: blur(2px);
 }
 
 /* Spacing */
@@ -30,12 +50,9 @@ td, th {
   padding: 20px;
 }
 
-.leaderboard_winner {
-  background-color: #e2b01c;
-}
 
 th {
-  background: rgba(124, 214, 255, 0.836);
+  background: rgba(124, 214, 255, 0.9);
   /* color: white; */
   border-radius: 0;
   position: sticky;
@@ -51,11 +68,6 @@ tfoot > tr  {
   background: black;
   color: white;
 }
-
-tbody > tr:hover {
-  background-color: #f6f4d1cc;
-}
-
 
 form > p {
   margin: 2%;
@@ -100,9 +112,9 @@ form > input[type="submit"] {
 
 /* Used for alternating rows to make tables interesting */
 .row-1 {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255, 0.9);
 }
 
 .row-2 {
-  background-color: #e6e6e6;
+  background-color: #e6e6e6df;
 }
