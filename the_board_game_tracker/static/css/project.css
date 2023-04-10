@@ -35,17 +35,13 @@ td, th {
 }
 
 th {
-  background: brown;
-  color: white;
+  background: rgba(124, 214, 255, 0.836);
+  /* color: white; */
   border-radius: 0;
   position: sticky;
   top: 0;
   padding: 10px;
 }
-
-/* tr > th[scope="row"] {
-  background: #ff8400cc;
-} */
 
 .primary{
   background-color: #000000
@@ -60,10 +56,6 @@ tbody > tr:hover {
   background-color: #f6f4d1cc;
 }
 
-form {
-  border: 1px solid #000000;
-  margin-bottom: 1em;
-}
 
 form > p {
   margin: 2%;
