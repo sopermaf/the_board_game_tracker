@@ -12,6 +12,7 @@ class BoardGameForm(ModelForm):
         model = BoardGame
         fields = [
             "name",
+            "date_added",
             "tags",
             "game_weight",
             "range_of_players",

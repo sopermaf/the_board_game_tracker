@@ -62,7 +62,9 @@ class BoardGameFilter(FilterSet):
     range_of_players = NumberFilter(
         method="int_within_range", label="Number of Players"
     )
-    order_games = GameNameOrderedDefault(fields=("game_weight", "game_duration_mins"))
+    order_games = GameNameOrderedDefault(
+        fields=("game_weight", "game_duration_mins", "date_added")
+    )
     name = CharFilter(field_name="name", lookup_expr="icontains")
 
     class Meta:

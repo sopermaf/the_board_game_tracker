@@ -39,6 +39,7 @@ class BoardGameManager(models.Manager):
 
 class BoardGame(models.Model):
     name = models.CharField(primary_key=True, max_length=255)
+    date_added = models.DateField(default=timezone.now)
     users_played_by = models.ManyToManyField(
         User, related_name="games_played", through="PlayedBoardGame"
     )
