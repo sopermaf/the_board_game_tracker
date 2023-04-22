@@ -70,7 +70,7 @@ document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() =
                 {% for update in updates_list %}
                     <tr class={% cycle 'row-1' 'row-2' %}>
                         <td> {{ update.grouper }} </td>
-                        <td>
+                        <td class="updates-player-games">
                             <ul>
                                 {% for player in update.list %}
                                 <li>

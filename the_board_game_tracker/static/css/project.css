@@ -105,6 +105,10 @@ form > input[type="submit"] {
   width: 100px;
 }
 
+.updates-player-games {
+  text-align: left;
+}
+
 .updates-player {
   text-decoration: underline;
   /* font-style: oblique; */
