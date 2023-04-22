@@ -62,10 +62,12 @@
                         </ul>
                     </td>
                 </tr>
+                {% if  game.date_added%}
                 <tr class="{% cycle rowcolors %}">
                     <th scope="row"> Date Added </th>
-                    <td> {{ game.date_added }} </td>
+                    <td> {{ game.date_added}} </td>
                 </tr>
+                {% endif %}
             </table>
         </div>
     </div>

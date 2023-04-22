@@ -21,23 +21,29 @@ class PlayedGameInline(admin.TabularInline):
     extra = 0
 
 
-class HasImageFilter(admin.SimpleListFilter):
-    title = "has_image"
-    parameter_name = "has_image"
+def simple_list_filter_factory(paramter, **query_conditions):
+    class SimpleYesNo(admin.SimpleListFilter):
+        title = paramter
+        parameter_name = paramter
 
-    def lookups(self, request, model_admin):
-        return (
-            ("Yes", "Yes"),
-            ("No", "No"),
-        )
+        def __init__(self, request, params, model, model_admin):
+            super().__init__(request, params, model, model_admin)
 
-    def queryset(self, request, queryset):
-        value = self.value()
-        if value == "Yes":
-            return queryset.exclude(image_src="")
-        elif value == "No":
-            return queryset.filter(image_src="")
-        return queryset
+        def lookups(self, request, model_admin):
+            return (
+                ("Yes", "Yes"),
+                ("No", "No"),
+            )
+
+        def queryset(self, request, queryset):
+            value = self.value()
+            if value == "Yes":
+                return queryset.exclude(**query_conditions)
+            elif value == "No":
+                return queryset.filter(**query_conditions)
+            return queryset
+
+    return SimpleYesNo
 
 
 @admin.register(BoardGame)
@@ -49,8 +55,12 @@ class BoardGameAdmin(admin.ModelAdmin):
         "game_duration_mins",
         "price",
         "has_image",
+        "date_added",
     ]
-    list_filter = [HasImageFilter]
+    list_filter = [
+        simple_list_filter_factory("has_image", image_src=""),
+        simple_list_filter_factory("has_date_added", date_added__isnull=True),
+    ]
     list_per_page = 20
     search_fields = ["name"]
     form = BoardGameForm

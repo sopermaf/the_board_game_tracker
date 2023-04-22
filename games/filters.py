@@ -1,7 +1,7 @@
 from typing import Any
 
 from django.contrib.auth import get_user_model
-from django.db.models import QuerySet, Value
+from django.db.models import F, QuerySet, Value
 from django.db.models.functions import Lower, Replace
 from django.forms import SelectMultiple
 from django_filters import (
@@ -33,9 +33,18 @@ class GameNameOrderedDefault(OrderingFilter):
 
     def filter(self, qs: QuerySet, value):
         if value:
-            orderings = [self.get_ordering_value(param) for param in value if param]
+            orderings = {self.get_ordering_value(param) for param in value if param}
         else:
-            orderings = []
+            orderings = set()
+
+        # NOTE: show the `null` games as the oldest games that we are unsure of the exact
+        # date of addition
+        if "date_added" in orderings:
+            orderings.remove("date_added")
+            orderings.add(F("date_added").desc(nulls_last=True))
+        elif "-date_added" in orderings:
+            orderings.remove("-date_added")
+            orderings.add(F("date_added").asc(nulls_first=True))
 
         qs = qs.annotate(
             name_without_the=Replace(Lower("name"), Value("the "), Value(""))
