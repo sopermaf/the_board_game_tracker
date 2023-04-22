@@ -28,15 +28,15 @@ document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() =
         <div class="col-sm-12 col-lg-1"></div>
 
         <div class="col-xs-10 col-sm-12 col-lg-5 mb-5 mt-2">
-            <h2 class="shadow-sm"> Player Ranking </h2>
+            <h2 class="shadow-sm"> </h2>
 
             <table class="shadow-lg">
+                <tr> <th colspan="4"><h2 class="shadow-sm">  🏆 Leaderboard 🏆 </h2> </th> </tr>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Games Unplayed</th>
                     <th scope="col">Completed Weight</th>
-                </tr>
                 </tr>
                 {% for user in users %}
                     <tr class="{% cycle 'row-1' 'row-2' %} ">
@@ -85,5 +85,28 @@ document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() =
             </table>
             </div>
         </div>
+
+        <div class="row mb-3 mt-2">
+            <div class="col-xs-2 col-lg-1"></div>
+
+            <div class="col-lg-5 mb-5 mt-2">
+                <table class="shadow-lg">
+                    <tr> <th colspan="3"><h2 class="shadow-sm"> 🔥 Hot Players (last 30 days) 🔥 </h2> </th> </tr>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Games Played</th>
+                    </tr>
+                    {% for user in hot_users %}
+                        <tr class="{% cycle 'row-1' 'row-2' %} ">
+                            <td class="fw-bolder" >{{ forloop.counter }} </td>
+                            <td> {{ user.played_by__username|capfirst }} </td>
+                            <td> {{ user.total_played }} </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
     </div>
 {% endblock %}

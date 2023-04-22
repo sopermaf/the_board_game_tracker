@@ -20,6 +20,9 @@ class LeaderBoard(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["recent_newly_played"] = PlayedBoardGame.objects.newly_played_updates()
+        context["hot_users"] = PlayedBoardGame.objects.leaders_of_recently_played(
+            days_behind_window=30
+        )
         return context
 
 

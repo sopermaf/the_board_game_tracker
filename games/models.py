@@ -7,7 +7,7 @@ from django.conf import settings
 from django.contrib.postgres.aggregates import StringAgg
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-from django.db.models import Value
+from django.db.models import Count, Value
 from django.db.models.functions import Lower, Replace
 from django.urls import reverse
 from django.utils import timezone
@@ -115,6 +115,16 @@ class PlayedBoardGameManager(models.Manager):
             )
             .order_by("-date_played", "played_by__username")
             .filter(date_played__gte=date.today() - timedelta(days=30))
+        )
+
+    def leaders_of_recently_played(self, days_behind_window: int):
+        return (
+            self.filter(
+                date_played__gte=date.today() - timedelta(days=days_behind_window)
+            )
+            .values("played_by__username")
+            .annotate(total_played=Count("played_by__username"))
+            .order_by("-total_played")
         )
 
 

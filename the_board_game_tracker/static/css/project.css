@@ -64,6 +64,10 @@ th {
   background-color: #000000
 }
 
+th {
+  text-align: center;
+}
+
 tfoot > tr  {
   background: black;
   color: white;
