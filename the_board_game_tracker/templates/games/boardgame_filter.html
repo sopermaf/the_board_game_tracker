@@ -28,7 +28,6 @@ $(".chosen-select").chosen({
     <div class="row mb-3 mt-4">
         <div class="col-sm-2 col-lg-2"></div>
         <div class="col-sm-8 col-lg-4 mb-4">
-            {% comment %} <h2> Search </h2> {% endcomment %}
             <form action="" method="get" class="mb-3 shadow border-1">
                 {{ filter.form.as_p }}
                 <input type="submit" />
@@ -44,7 +43,6 @@ $(".chosen-select").chosen({
                     <th scope="col">Duration (mins)</th>
                     <th scope="col">Number of Players</th>
                     <th scope="col">Tags</th>
-                </tr>
                 </tr>
                 {% include "games/boardgame_filter_table.html" %}
             </table>

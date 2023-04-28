@@ -53,11 +53,13 @@ td, th {
 
 th {
   background: rgba(124, 214, 255, 0.9);
-  /* color: white; */
   border-radius: 0;
-  position: sticky;
   top: 0;
   padding: 10px;
+}
+
+th[scope=col] {
+  position: sticky;
 }
 
 .primary{
