@@ -3,30 +3,34 @@
 {% load games_extras %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-sm-12 col-lg-6">
-            {% if game.image_src %}
-                <div>
-                    <img src="{{ game.image_src }}" class="profile-image">
-                </div>
-            {% endif %}
+    <div class="row mb-3 mt-2">
+        <div class="col-lg-4"></div>
 
-            <h2>
-                {{ game.name|capfirst }}
-
-                {% if request.user.is_staff %}
-                    <a href="{% url 'admin:games_boardgame_change' game.pk %}" class="hidden-link">&#9999;</a>
-                {% endif %}
-            </h2>
-            <a href="{{ game.external_link }}"> Board Game Geek </a>
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-sm-12 col-lg-6">
+        <div class="col-lg-4 mb-3 mt-2">
             <table class="shadow-lg">
+                {% comment %} Header Section for Profile {% endcomment %}
                 <tr class="{% cycle 'row-1' 'row-2' as rowcolors %}">
+                    <th colspan="2">
+                        {% if game.image_src %}
+                            <div> <img src="{{ game.image_src }}" class="profile-image"> </div>
+                        {% endif %}
+
+                        <h2>
+                            {{ game.name|capfirst }}
+
+                            {% if request.user.is_staff %}
+                                <a href="{% url 'admin:games_boardgame_change' game.pk %}" class="hidden-link">&#9999;</a>
+                            {% endif %}
+                        </h2>
+
+                        {% if game.external_link %}
+                        <a href="{{ game.external_link }}"> Board Game Geek </a>
+                        {% endif %}
+                    </th>
+                </tr>
+
+                {% comment %} Data Section Profile {% endcomment %}
+                <tr class="{% cycle rowcolors %}">
                     <th scope="row"> Weight </th>
                     <td> {{ game.game_weight }} </td>
                 </tr>
