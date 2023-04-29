@@ -9,7 +9,7 @@
         <div class="col-lg-4 mb-3 mt-2">
             <table class="shadow-lg">
                 {% comment %} Header Section for Profile {% endcomment %}
-                <tr class="{% cycle 'row-1' 'row-2' as rowcolors %}">
+                <tr >
                     <th colspan="2">
                         {% if game.image_src %}
                             <div> <img src="{{ game.image_src }}" class="profile-image"> </div>
@@ -30,21 +30,21 @@
                 </tr>
 
                 {% comment %} Data Section Profile {% endcomment %}
-                <tr class="{% cycle rowcolors %}">
+                <tr class="{% cycle 'row-1' 'row-2' as rowcolors %}">
                     <th scope="row"> Weight </th>
                     <td> {{ game.game_weight }} </td>
                 </tr>
-                <tr class="{% cycle rowcolors %}">
+                <tr >
                     <th scope="row"> Players </th>
-                    <td> {{ game.range_of_players|humaize_inclusive_range }} </td>
+                    <td class="{% cycle rowcolors %}"> {{ game.range_of_players|humaize_inclusive_range }} </td>
                 </tr>
-                <tr class="{% cycle rowcolors %}">
+                <tr >
                     <th scope="row"> Duration (mins) </th>
-                    <td> {{ game.game_duration_mins|humaize_inclusive_range }} </td>
+                    <td class="{% cycle rowcolors %}"> {{ game.game_duration_mins|humaize_inclusive_range }} </td>
                 </tr>
-                <tr class="{% cycle rowcolors %}">
+                <tr >
                     <th scope="row"> Tags </th>
-                    <td>
+                    <td class="{% cycle rowcolors %}">
                         <ul>
                             {% for tag in game.tags.all %}
                                 <li> {{ tag }} </li>
@@ -54,9 +54,9 @@
                         </ul>
                     </td>
                 </tr>
-                <tr class="{% cycle rowcolors %}">
+                <tr >
                     <th scope="row"> Played By </th>
-                    <td>
+                    <td class="{% cycle rowcolors %}">
                         <ul>
                             {% for player in game.users_played_by.all %}
                                 <li> {{ player|capfirst }} </li>
@@ -67,9 +67,9 @@
                     </td>
                 </tr>
                 {% if  game.date_added%}
-                <tr class="{% cycle rowcolors %}">
+                <tr >
                     <th scope="row"> Date Added </th>
-                    <td> {{ game.date_added}} </td>
+                    <td class="{% cycle rowcolors %}"> {{ game.date_added}} </td>
                 </tr>
                 {% endif %}
             </table>
