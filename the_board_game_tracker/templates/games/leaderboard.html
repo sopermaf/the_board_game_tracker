@@ -4,20 +4,30 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 <script>
-const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
+    const table = document.querySelector('table');
+    const tbody = table.querySelector('tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
 
-const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
-    v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
-    )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+    const numericColumns = Array.from(table.querySelectorAll('.numeric'));
 
-// do the work...
-document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
-    const table = th.closest('table');
-    Array.from(table.querySelectorAll('tr:nth-child(n+3)'))
-        .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
-        .forEach(tr => table.appendChild(tr) );
-})));
-
+    numericColumns.forEach(column => {
+      column.addEventListener('click', () => {
+        const columnIndex = Array.from(column.parentNode.children).indexOf(column);
+        const sortDirection = column.dataset.sortDirection === 'asc' ? 'desc' : 'asc';
+        column.dataset.sortDirection = sortDirection;
+        rows.sort((rowA, rowB) => {
+          const valueA = parseFloat(rowA.children[columnIndex].textContent);
+          const valueB = parseFloat(rowB.children[columnIndex].textContent);
+          if (sortDirection === 'asc') {
+            return valueA - valueB;
+          } else {
+            return valueB - valueA;
+          }
+        });
+        tbody.innerHTML = '';
+        rows.forEach(row => tbody.appendChild(row));
+      });
+    })
 </script>
 
 {% endblock %}
@@ -31,13 +41,16 @@ document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() =
             <h2 class="shadow-sm"> </h2>
 
             <table class="shadow-lg">
-                <tr> <th colspan="4"><h2 class="shadow-sm">  🏆 Leaderboard 🏆 </h2> </th> </tr>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Games Unplayed</th>
-                    <th scope="col">Completed Weight</th>
-                </tr>
+                <thead>
+                    <tr> <th colspan="4"><h2 class="shadow-sm">  🏆 Leaderboard 🏆 </h2> </th> </tr>
+                    <tr>
+                        <th scope="col" class="numeric">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col" class="numeric">Games Unplayed</th>
+                        <th scope="col" class="numeric">Completed Weight</th>
+                    </tr>
+                </thead>
+                <tbody>
                 {% for user in users %}
                     <tr class="{% cycle 'row-1' 'row-2' %} ">
                         <td class="fw-bolder">{{ forloop.counter }} </td>
@@ -57,6 +70,7 @@ document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() =
                         <td>{{ user.completed_weight }}</td>
                     </tr>
                 {% endfor %}
+                </tbody>
             </table>
         </div>
 
