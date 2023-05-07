@@ -111,7 +111,8 @@ class PlayedBoardGameManager(models.Manager):
                     "board_game",
                     delimiter=", ",
                     ordering="board_game",
-                )
+                ),
+                num_games=Count("board_game"),
             )
             .order_by("-date_played", "played_by__username")
             .filter(date_played__gte=date.today() - timedelta(days=30))

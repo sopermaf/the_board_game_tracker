@@ -74,8 +74,9 @@ document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() =
                             <ul>
                                 {% for player in update.list %}
                                 <li>
-                                    <span class="updates-player"> {{ player.played_by__username|title }}:</span>
-                                    <span class="updates-games"> {{ player.games }} </span>
+                                    <span class="updates-player"> {{ player.played_by__username|title }} </span>
+                                    {% comment %} <br> {% endcomment %}
+                                    <span class="updates-games"> ({{ player.num_games }}): {{ player.games }} </span>
                                 </li>
                                 {% endfor %}
                             </ul>
