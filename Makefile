@@ -41,4 +41,4 @@ pip-compile:
 	pip-compile requirements/local.in
 
 pip-sync:
-	pip-sync requirements/base.txt requirements/local.in
+	pip-sync requirements/base.txt requirements/local.txt
