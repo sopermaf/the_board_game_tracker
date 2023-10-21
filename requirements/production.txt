@@ -21,9 +21,7 @@ django==4.2
     #   -c requirements/base.txt
     #   django-anymail
 django-anymail[mailgun]==9.0
-    # via
-    #   -r requirements/production.in
-    #   django-anymail
+    # via -r requirements/production.in
 gunicorn==20.1.0
     # via -r requirements/production.in
 idna==3.4

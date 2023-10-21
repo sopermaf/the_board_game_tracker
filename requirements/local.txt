@@ -300,9 +300,7 @@ watchdog==3.0.0
 wcwidth==0.2.8
     # via prompt-toolkit
 werkzeug[watchdog]==2.2.2
-    # via
-    #   -r requirements/local.in
-    #   werkzeug
+    # via -r requirements/local.in
 wheel==0.41.2
     # via pip-tools
 wrapt==1.15.0
