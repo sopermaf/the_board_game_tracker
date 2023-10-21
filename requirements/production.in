@@ -1,0 +1,9 @@
+# PRECAUTION: avoid production dependencies that aren't in development
+-c base.txt
+
+gunicorn
+psycopg2
+
+# Django
+# ------------------------------------------------------------------------------
+django-anymail[mailgun]
