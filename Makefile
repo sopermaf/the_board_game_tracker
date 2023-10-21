@@ -34,3 +34,11 @@ test:
 
 teardown:
 	docker-compose -f $(COMPOSE_FILE) down
+
+pip-compile:
+	pip-compile requirements/base.in
+	pip-compile requirements/production.in
+	pip-compile requirements/local.in
+
+pip-sync:
+	pip-sync requirements/base.txt requirements/local.in
