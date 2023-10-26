@@ -12,15 +12,23 @@ certifi==2023.7.22
     # via
     #   -c requirements/base.txt
     #   requests
+cffi==1.16.0
+    # via
+    #   -c requirements/base.txt
+    #   cryptography
 charset-normalizer==3.3.0
     # via
     #   -c requirements/base.txt
     #   requests
+cryptography==41.0.4
+    # via
+    #   -c requirements/base.txt
+    #   django-anymail
 django==4.2.6
     # via
     #   -c requirements/base.txt
     #   django-anymail
-django-anymail[mailgun]==10.1
+django-anymail[mailgun]==10.2
     # via -r requirements/production.in
 gunicorn==21.2.0
     # via -r requirements/production.in
@@ -32,6 +40,10 @@ packaging==23.2
     # via gunicorn
 psycopg2==2.9.9
     # via -r requirements/production.in
+pycparser==2.21
+    # via
+    #   -c requirements/base.txt
+    #   cffi
 requests==2.31.0
     # via
     #   -c requirements/base.txt
@@ -40,10 +52,6 @@ sqlparse==0.4.4
     # via
     #   -c requirements/base.txt
     #   django
-typing-extensions==4.8.0
-    # via
-    #   -c requirements/base.txt
-    #   asgiref
 urllib3==2.0.7
     # via
     #   -c requirements/base.txt
