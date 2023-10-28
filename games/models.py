@@ -40,7 +40,7 @@ class BoardGameManager(models.Manager):
 class BoardGame(models.Model):
     name = models.CharField(primary_key=True, max_length=255)
     date_added = models.DateField(default=timezone.now, blank=True, null=True)
-    users_played_by = models.ManyToManyField(
+    users_played_by = models.ManyToManyField(  # type: ignore
         User, related_name="games_played", through="PlayedBoardGame"
     )
     tags = models.ManyToManyField(BoardGameTag, related_name="games", blank=True)
@@ -76,7 +76,7 @@ class BoardGame(models.Model):
     def external_link(self):
         return f"https://boardgamegeek.com/{self.board_game_geek_id}"
 
-    def scrape_boardgamegeek_img_src(self) -> str:
+    def scrape_boardgamegeek_img_src(self):
         """
         Scrapes image from board game geek and sets the `image_src` and `board_game_geek_ids`
 

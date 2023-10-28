@@ -5,10 +5,13 @@ Werkzeug[watchdog]
 ipdb
 psycopg2
 
-# Testing
+# Typing
 # ------------------------------------------------------------------------------
 mypy
-django-stubs
+django-stubs[compatible-mypy]
+types-requests
+
+# Testing
 pytest
 pytest-sugar
 freezegun
