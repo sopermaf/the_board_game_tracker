@@ -40,5 +40,10 @@ pip-compile:
 	pip-compile requirements/production.in
 	pip-compile requirements/local.in
 
+pip-compile-upgrade:
+	pip-compile --upgrade requirements/base.in
+	pip-compile --upgrade requirements/production.in
+	pip-compile --upgrade requirements/local.in
+
 pip-sync:
 	pip-sync requirements/base.txt requirements/local.txt
