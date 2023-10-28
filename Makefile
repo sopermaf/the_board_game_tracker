@@ -47,3 +47,6 @@ pip-compile-upgrade:
 
 pip-sync:
 	pip-sync requirements/base.txt requirements/local.txt
+
+mypy:
+	docker-compose -f local.yml run django mypy .
