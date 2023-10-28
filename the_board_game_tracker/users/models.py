@@ -53,7 +53,7 @@ class User(AbstractUser):
     # by marking them as `cold` or `dead`
     replayed_game_date = DateField(blank=True, null=True)
 
-    objects = BoardGameUserManager()
+    objects = BoardGameUserManager()  # type: ignore
 
     def get_absolute_url(self):
         """Get url for user's detail view.

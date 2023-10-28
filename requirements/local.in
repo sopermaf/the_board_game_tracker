@@ -8,7 +8,7 @@ psycopg2
 # Typing
 # ------------------------------------------------------------------------------
 mypy
-django-stubs
+django-stubs[compatible-mypy]
 types-requests
 
 # Testing

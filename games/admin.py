@@ -101,7 +101,7 @@ class BoardGameAdmin(admin.ModelAdmin):
     def has_image(self, obj: BoardGame):
         return bool(obj.image_src)
 
-    has_image.boolean = True
+    has_image.boolean = True  # type: ignore
 
 
 @admin.register(BoardGameTag)
