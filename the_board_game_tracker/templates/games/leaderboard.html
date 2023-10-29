@@ -29,7 +29,7 @@
       });
     })
 
-    new Morris.Line({
+    var chart = new Morris.Line({
         // ID of the element in which to draw the chart.
         element: 'GamesPlayedProgress',
         // Chart data records -- each entry in this array corresponds to a point on
@@ -38,24 +38,8 @@
         // The name of the data record attribute that contains x-values.
         xkey: 'date_played',
         // A list of names of data record attributes that contain y-values.
-        ykeys: [
-            'ferdia',
-            'keila',
-            'peter',
-            'rob',
-            'enya',
-            'ryan',
-            'fabian'
-        ],
-        labels: [
-            'ferdia',
-            'keila',
-            'peter',
-            'rob',
-            'enya',
-            'ryan',
-            'fabian'
-        ],
+        ykeys: {{ usernames|safe }},
+        labels: {{ usernames|safe }},
         smooth: false
       });
 

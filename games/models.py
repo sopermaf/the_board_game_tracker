@@ -1,3 +1,4 @@
+import collections
 import itertools
 import urllib.parse
 from datetime import date, datetime, timedelta
@@ -142,7 +143,7 @@ class PlayedBoardGameManager(models.Manager):
             for user in get_user_model().objects.all()
         ]
         combined_qs = sorted(itertools.chain(*user_qs), key=lambda x: x["date_played"])
-        return [
+        dates_played_data = [
             {
                 k: v
                 for player_date_played in grouper
@@ -152,6 +153,14 @@ class PlayedBoardGameManager(models.Manager):
                 combined_qs, key=lambda x: x["date_played"]
             )
         ]
+
+        player_running_count = collections.Counter()
+        for date_entry in dates_played_data:
+            player_data_only = date_entry.copy()
+            player_data_only.pop("date_played")
+            player_running_count.update(player_data_only)
+            date_entry.update(player_running_count)
+        return dates_played_data
 
 
 class PlayedBoardGame(models.Model):

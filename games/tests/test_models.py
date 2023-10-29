@@ -153,6 +153,7 @@ def test_played_games_updates():
 
 
 def test_games_played_chart_data():
+    UserFactory(username="joe")
     PlayedBoardGameFactory.create_batch(
         size=3, played_by__username="jack", date_played=DEAD_DATE
     )
@@ -170,6 +171,7 @@ def test_games_played_chart_data():
         },
         {
             "date_played": COLD_DATE,
-            "jack": 1,
+            "jack": 4,
+            "jill": 2,
         },
     ]

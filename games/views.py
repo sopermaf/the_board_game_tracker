@@ -27,6 +27,7 @@ class LeaderBoard(ListView):
         )
         data = PlayedBoardGame.objects.game_played_over_time_annotation()
         context["game_progress_chart_data"] = json.dumps(data, default=str)
+        context["usernames"] = list(User.objects.values_list("username", flat=True))
         return context
 
 
