@@ -1,3 +1,5 @@
+import json
+
 from django.views.generic import DetailView, ListView
 from django_filters.views import FilterView
 
@@ -23,6 +25,9 @@ class LeaderBoard(ListView):
         context["hot_users"] = PlayedBoardGame.objects.leaders_of_recently_played(
             days_behind_window=30
         )
+        data = PlayedBoardGame.objects.game_played_over_time_annotation()
+        context["game_progress_chart_data"] = json.dumps(data, default=str)
+        context["usernames"] = list(User.objects.values_list("username", flat=True))
         return context
 
 

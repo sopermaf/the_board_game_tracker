@@ -52,9 +52,13 @@ td, th {
   padding: 20px;
 }
 
+.leaderboard_winner {
+  background-color: #e2b01c;
+}
 
 th {
-  background: rgba(124, 214, 255, 0.9);
+  background: brown;
+  color: white;
   border-radius: 0;
   top: 0;
   padding: 10px;
@@ -68,13 +72,18 @@ th[scope=col] {
   background-color: #000000
 }
 
-tr {
-  text-align: center;
-}
-
 tfoot > tr  {
   background: black;
   color: white;
+}
+
+tbody > tr:hover {
+  background-color: #f6f4d1cc;
+}
+
+form {
+  border: 1px solid #000000;
+  margin-bottom: 1em;
 }
 
 form > p {
