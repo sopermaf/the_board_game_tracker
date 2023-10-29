@@ -30,7 +30,7 @@ django-%:
 	docker-compose -f $(COMPOSE_FILE) run --rm django python manage.py $* $(args)
 
 test:
-	docker-compose -f $(COMPOSE_FILE) run django pytest --disable-warnings $(args)
+	docker-compose -f $(COMPOSE_FILE) run django pytest $(args)
 
 teardown:
 	docker-compose -f $(COMPOSE_FILE) down

@@ -1,9 +1,11 @@
+import itertools
 import urllib.parse
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 
 import requests
 from bs4 import BeautifulSoup
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.contrib.postgres.aggregates import StringAgg
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
@@ -127,13 +129,37 @@ class PlayedBoardGameManager(models.Manager):
             .order_by("-total_played")
         )
 
+    def game_played_over_time_annotation(self) -> list[dict[str, datetime | int]]:
+        """
+        Returns dates grouped together and the number each has played on those dates
+        """
+        # TODO: fix poor performance temporary solution that's workable for now with low data
+        user_qs = [
+            self.filter(played_by__username=user.username)
+            .values("date_played")
+            .annotate(**{user.username: Count("played_by")})
+            .order_by("date_played")
+            for user in get_user_model().objects.all()
+        ]
+        combined_qs = sorted(itertools.chain(*user_qs), key=lambda x: x["date_played"])
+        return [
+            {
+                k: v
+                for player_date_played in grouper
+                for k, v in player_date_played.items()
+            }
+            for _, grouper in itertools.groupby(
+                combined_qs, key=lambda x: x["date_played"]
+            )
+        ]
+
 
 class PlayedBoardGame(models.Model):
     played_by = models.ForeignKey(User, on_delete=models.CASCADE)
     board_game = models.ForeignKey(BoardGame, on_delete=models.CASCADE)
     date_played = models.DateField(default=timezone.now)
 
-    objects = PlayedBoardGameManager()
+    objects: PlayedBoardGameManager = PlayedBoardGameManager()
 
     class Meta:
         constraints = [

@@ -150,3 +150,26 @@ def test_played_games_updates():
             "played_by__username": jack.username,
         },
     ]
+
+
+def test_games_played_chart_data():
+    PlayedBoardGameFactory.create_batch(
+        size=3, played_by__username="jack", date_played=DEAD_DATE
+    )
+    PlayedBoardGameFactory.create_batch(
+        size=2, played_by__username="jill", date_played=DEAD_DATE
+    )
+    PlayedBoardGameFactory(played_by__username="jack", date_played=COLD_DATE)
+
+    qs = models.PlayedBoardGame.objects.game_played_over_time_annotation()
+    assert list(qs) == [
+        {
+            "date_played": DEAD_DATE,
+            "jack": 3,
+            "jill": 2,
+        },
+        {
+            "date_played": COLD_DATE,
+            "jack": 1,
+        },
+    ]
