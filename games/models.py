@@ -154,7 +154,7 @@ class PlayedBoardGameManager(models.Manager):
             )
         ]
 
-        player_running_count = collections.Counter()
+        player_running_count: collections.Counter = collections.Counter()
         for date_entry in dates_played_data:
             player_data_only = date_entry.copy()
             player_data_only.pop("date_played")
