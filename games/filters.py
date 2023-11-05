@@ -57,7 +57,7 @@ class BoardGameFilter(FilterSet):
     not_played_by = ModelMultipleChoiceFilter(
         field_name="users_played_by",
         exclude=True,
-        queryset=User.objects.order_by("username"),
+        queryset=User.objects.order_by("username").filter(is_hidden=False),
         widget=multi_select,
     )
     tags = ModelMultipleChoiceFilter(

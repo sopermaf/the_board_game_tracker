@@ -27,6 +27,7 @@ class UserAdmin(auth_admin.UserAdmin):
             {
                 "fields": (
                     "is_active",
+                    "is_hidden",
                     "is_staff",
                     "is_superuser",
                     "groups",
@@ -35,5 +36,5 @@ class UserAdmin(auth_admin.UserAdmin):
             },
         ),
     )
-    list_display = ["username", "name", "is_superuser"]
+    list_display = ["username", "name", "is_superuser", "is_hidden"]
     search_fields = ["name"]

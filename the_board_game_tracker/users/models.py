@@ -3,7 +3,7 @@ from datetime import date, timedelta
 from decimal import Decimal
 
 from django.contrib.auth.models import AbstractUser, UserManager
-from django.db.models import CharField, Count, DateField, F, Max, Sum
+from django.db.models import BooleanField, CharField, Count, DateField, F, Max, Sum
 from django.db.models.functions import Coalesce
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
@@ -26,7 +26,8 @@ class LeaderBoardStates(enum.Enum):
 class BoardGameUserManager(UserManager):
     def leaderboard(self):
         total_board_games = BoardGame.objects.count()
-        qs = self.annotate(
+        qs = self.filter(is_hidden=False)
+        qs = qs.annotate(
             number_unplayed_games=total_board_games - Count("games_played")
         )
         qs = qs.annotate(
@@ -52,6 +53,7 @@ class User(AbstractUser):
     # used to not punish players for replaying games
     # by marking them as `cold` or `dead`
     replayed_game_date = DateField(blank=True, null=True)
+    is_hidden = BooleanField(default=False)
 
     objects = BoardGameUserManager()  # type: ignore
 
