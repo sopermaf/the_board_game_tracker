@@ -19,8 +19,6 @@ asttokens==2.4.1
     # via stack-data
 babel==2.13.1
     # via sphinx
-backcall==0.2.0
-    # via ipython
 black==23.10.1
     # via -r requirements/local.in
 build==1.0.3
@@ -32,7 +30,7 @@ certifi==2023.7.22
     #   requests
 cfgv==3.4.0
     # via pre-commit
-charset-normalizer==3.3.1
+charset-normalizer==3.3.2
     # via
     #   -c requirements/base.txt
     #   -c requirements/production.txt
@@ -55,7 +53,7 @@ dill==0.3.7
     # via pylint
 distlib==0.3.7
     # via virtualenv
-django==4.2.6
+django==4.2.7
     # via
     #   -c requirements/base.txt
     #   -c requirements/production.txt
@@ -79,23 +77,23 @@ exceptiongroup==1.1.3
     # via
     #   ipython
     #   pytest
-executing==2.0.0
+executing==2.0.1
     # via stack-data
 factory-boy==3.3.0
     # via -r requirements/local.in
-faker==19.12.0
+faker==19.13.0
     # via factory-boy
-filelock==3.13.0
+filelock==3.13.1
     # via virtualenv
 flake8==6.1.0
     # via
     #   -r requirements/local.in
     #   flake8-isort
-flake8-isort==6.1.0
+flake8-isort==6.1.1
     # via -r requirements/local.in
 freezegun==1.2.2
     # via -r requirements/local.in
-identify==2.5.30
+identify==2.5.31
     # via pre-commit
 idna==3.4
     # via
@@ -108,7 +106,7 @@ iniconfig==2.0.0
     # via pytest
 ipdb==0.13.13
     # via -r requirements/local.in
-ipython==8.16.1
+ipython==8.17.2
     # via ipdb
 isort==5.12.0
     # via
@@ -154,8 +152,6 @@ pathspec==0.11.2
     # via black
 pexpect==4.8.0
     # via ipython
-pickleshare==0.7.5
-    # via ipython
 pip-tools==7.3.0
     # via -r requirements/local.in
 platformdirs==3.11.0
@@ -200,7 +196,7 @@ pytest==7.4.3
     #   -r requirements/local.in
     #   pytest-django
     #   pytest-sugar
-pytest-django==4.5.2
+pytest-django==4.6.0
     # via -r requirements/local.in
 pytest-sugar==0.9.7
     # via -r requirements/local.in
@@ -266,11 +262,11 @@ tomli==2.0.1
     #   pylint
     #   pyproject-hooks
     #   pytest
-tomlkit==0.12.1
+tomlkit==0.12.2
     # via pylint
 tornado==6.3.3
     # via livereload
-traitlets==5.12.0
+traitlets==5.13.0
     # via
     #   ipython
     #   matplotlib-inline
@@ -300,11 +296,11 @@ virtualenv==20.24.6
     # via pre-commit
 watchdog==3.0.0
     # via werkzeug
-wcwidth==0.2.8
+wcwidth==0.2.9
     # via prompt-toolkit
 werkzeug[watchdog]==3.0.1
     # via -r requirements/local.in
-wheel==0.41.2
+wheel==0.41.3
     # via pip-tools
 
 # The following packages are considered to be unsafe in a requirements file:

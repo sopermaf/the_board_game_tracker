@@ -12,11 +12,11 @@ certifi==2023.7.22
     # via
     #   -c requirements/base.txt
     #   requests
-charset-normalizer==3.3.1
+charset-normalizer==3.3.2
     # via
     #   -c requirements/base.txt
     #   requests
-django==4.2.6
+django==4.2.7
     # via
     #   -c requirements/base.txt
     #   django-anymail
