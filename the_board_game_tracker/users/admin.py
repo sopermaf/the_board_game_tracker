@@ -38,3 +38,12 @@ class UserAdmin(auth_admin.UserAdmin):
     )
     list_display = ["username", "name", "is_superuser", "is_hidden"]
     search_fields = ["name"]
+    actions = ["hide_players", "show_players"]
+
+    @admin.action(description="Hide users from the leaderboard")
+    def hide_players(self, request, queryset):
+        queryset.update(is_hidden=True)
+
+    @admin.action(description="Show users on the leaderboard")
+    def show_players(self, request, queryset):
+        queryset.update(is_hidden=False)
