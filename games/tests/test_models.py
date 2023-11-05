@@ -26,7 +26,7 @@ def test_leaderboard_attributes():
     UserFactory()  # user without games played
     BoardGameFactory()  # unplayed board game
     game_player = UserWith2GamesPlayedFactory()
-    PlayedBoardGameFactory(played_by__is_hidden=True)
+    PlayedBoardGameFactory(played_by__is_visible=False)
     assert models.BoardGame.objects.count() == 4
 
     best_player = User.objects.leaderboard().first()

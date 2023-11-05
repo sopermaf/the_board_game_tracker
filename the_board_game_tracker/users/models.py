@@ -26,7 +26,7 @@ class LeaderBoardStates(enum.Enum):
 class BoardGameUserManager(UserManager):
     def leaderboard(self):
         total_board_games = BoardGame.objects.count()
-        qs = self.filter(is_hidden=False)
+        qs = self.filter(is_visible=True)
         qs = qs.annotate(
             number_unplayed_games=total_board_games - Count("games_played")
         )
@@ -53,7 +53,7 @@ class User(AbstractUser):
     # used to not punish players for replaying games
     # by marking them as `cold` or `dead`
     replayed_game_date = DateField(blank=True, null=True)
-    is_hidden = BooleanField(default=False)
+    is_visible = BooleanField(default=True)
 
     objects = BoardGameUserManager()  # type: ignore
 
