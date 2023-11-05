@@ -26,12 +26,13 @@ def test_leaderboard_attributes():
     UserFactory()  # user without games played
     BoardGameFactory()  # unplayed board game
     game_player = UserWith2GamesPlayedFactory()
-    assert models.BoardGame.objects.count() == 3
+    PlayedBoardGameFactory(played_by__is_visible=False)
+    assert models.BoardGame.objects.count() == 4
 
     best_player = User.objects.leaderboard().first()
     assert best_player
     assert best_player.username == game_player.username
-    assert best_player.number_unplayed_games == 1
+    assert best_player.number_unplayed_games == 2
     assert best_player.completed_weight == 5
     assert best_player.status in LeaderBoardStates
 
