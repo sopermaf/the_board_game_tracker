@@ -31,3 +31,5 @@ ignore = [
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["E402"]
 "**/{tests,docs,tools}/*" = ["E402"]
+"wsgi.py" = ["ERA001"]
+"config/urls.py" = ["RUF005"]
