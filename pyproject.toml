@@ -1,0 +1,33 @@
+[tool.isort]
+profile = "black"
+
+[tool.ruff.lint]
+# 1. Enable flake8-bugbear (`B`) rules, in addition to the defaults.
+select = [
+    "E",
+    "W",
+    "F",
+    "B",
+    "PIE",
+    "SIM",
+    "PT",
+    "T20",
+    "PYI",
+    "TCH",
+    "RSE",
+    "ERA",
+    "PGH",
+    "PERF",
+    "RUF",
+]
+
+ignore = [
+    "E501", # line length
+    "B904", # raise from ...
+    "RUF012",
+]
+
+# 4. Ignore `E402` (import violations) in all `__init__.py` files, and in select subdirectories.
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402"]
+"**/{tests,docs,tools}/*" = ["E402"]
