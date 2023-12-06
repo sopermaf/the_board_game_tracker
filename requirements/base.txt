@@ -10,8 +10,6 @@ argon2-cffi-bindings==21.2.0
     # via argon2-cffi
 asgiref==3.7.2
     # via django
-async-timeout==4.0.3
-    # via redis
 beautifulsoup4==4.12.2
     # via -r requirements/base.in
 certifi==2023.11.17
@@ -47,7 +45,7 @@ django-crispy-forms==2.1
     #   crispy-bootstrap5
 django-environ==0.11.2
     # via -r requirements/base.in
-django-filter==23.4
+django-filter==23.5
     # via -r requirements/base.in
 django-model-utils==4.3.1
     # via -r requirements/base.in
@@ -68,7 +66,9 @@ pillow==10.1.0
 pycparser==2.21
     # via cffi
 pyjwt[crypto]==2.8.0
-    # via django-allauth
+    # via
+    #   django-allauth
+    #   pyjwt
 python-slugify==8.0.1
     # via -r requirements/base.in
 python3-openid==3.2.0
