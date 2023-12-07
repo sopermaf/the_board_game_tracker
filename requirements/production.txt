@@ -12,11 +12,19 @@ certifi==2023.11.17
     # via
     #   -c requirements/base.txt
     #   requests
+cffi==1.16.0
+    # via
+    #   -c requirements/base.txt
+    #   cryptography
 charset-normalizer==3.3.2
     # via
     #   -c requirements/base.txt
     #   requests
-django==4.2.7
+cryptography==41.0.5
+    # via
+    #   -c requirements/base.txt
+    #   django-anymail
+django==5.0
     # via
     #   -c requirements/base.txt
     #   django-anymail
@@ -32,6 +40,10 @@ packaging==23.2
     # via gunicorn
 psycopg2==2.9.9
     # via -r requirements/production.in
+pycparser==2.21
+    # via
+    #   -c requirements/base.txt
+    #   cffi
 requests==2.31.0
     # via
     #   -c requirements/base.txt
