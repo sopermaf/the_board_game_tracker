@@ -16,7 +16,7 @@ charset-normalizer==3.3.2
     # via
     #   -c requirements/base.txt
     #   requests
-django==4.2.7
+django==5.0.1
     # via
     #   -c requirements/base.txt
     #   django-anymail
@@ -24,7 +24,7 @@ django-anymail[mailgun]==10.2
     # via -r requirements/production.in
 gunicorn==21.2.0
     # via -r requirements/production.in
-idna==3.5
+idna==3.6
     # via
     #   -c requirements/base.txt
     #   requests

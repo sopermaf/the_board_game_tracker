@@ -12,7 +12,7 @@ asgiref==3.7.2
     # via django
 async-timeout==4.0.3
     # via redis
-beautifulsoup4==4.12.2
+beautifulsoup4==4.12.3
     # via -r requirements/base.in
 certifi==2023.11.17
     # via requests
@@ -24,11 +24,11 @@ charset-normalizer==3.3.2
     # via requests
 crispy-bootstrap5==2023.10
     # via -r requirements/base.in
-cryptography==41.0.5
+cryptography==41.0.7
     # via pyjwt
 defusedxml==0.7.1
     # via python3-openid
-django==4.2.7
+django==5.0.1
     # via
     #   -r requirements/base.in
     #   crispy-bootstrap5
@@ -39,7 +39,7 @@ django==4.2.7
     #   django-redis
     #   djangorestframework
     #   inclusive-django-range-fields
-django-allauth==0.58.2
+django-allauth==0.60.1
     # via -r requirements/base.in
 django-crispy-forms==2.1
     # via
@@ -47,7 +47,7 @@ django-crispy-forms==2.1
     #   crispy-bootstrap5
 django-environ==0.11.2
     # via -r requirements/base.in
-django-filter==23.4
+django-filter==23.5
     # via -r requirements/base.in
 django-model-utils==4.3.1
     # via -r requirements/base.in
@@ -55,15 +55,15 @@ django-redis==5.4.0
     # via -r requirements/base.in
 djangorestframework==3.14.0
     # via inclusive-django-range-fields
-hiredis==2.2.3
+hiredis==2.3.2
     # via -r requirements/base.in
-idna==3.5
+idna==3.6
     # via requests
 inclusive-django-range-fields==0.2.3
     # via -r requirements/base.in
 oauthlib==3.2.2
     # via requests-oauthlib
-pillow==10.1.0
+pillow==10.2.0
     # via -r requirements/base.in
 pycparser==2.21
     # via cffi
