@@ -10,8 +10,6 @@ argon2-cffi-bindings==21.2.0
     # via argon2-cffi
 asgiref==3.7.2
     # via django
-async-timeout==4.0.3
-    # via redis
 beautifulsoup4==4.12.3
     # via -r requirements/base.in
 certifi==2024.2.2
@@ -39,7 +37,7 @@ django==5.0.2
     #   django-redis
     #   djangorestframework
     #   inclusive-django-range-fields
-django-allauth==0.61.0
+django-allauth==0.61.1
     # via -r requirements/base.in
 django-crispy-forms==2.1
     # via
@@ -68,7 +66,9 @@ pillow==10.2.0
 pycparser==2.21
     # via cffi
 pyjwt[crypto]==2.8.0
-    # via django-allauth
+    # via
+    #   django-allauth
+    #   pyjwt
 python-slugify==8.0.3
     # via -r requirements/base.in
 python3-openid==3.2.0
