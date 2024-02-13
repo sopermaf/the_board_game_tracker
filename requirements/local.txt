@@ -17,7 +17,7 @@ asttokens==2.4.1
     # via stack-data
 babel==2.14.0
     # via sphinx
-black==24.1.1
+black==24.2.0
     # via -r requirements/local.in
 build==1.0.3
     # via pip-tools
