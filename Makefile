@@ -50,3 +50,11 @@ pip-sync:
 
 mypy:
 	docker-compose -f local.yml run django mypy .
+
+
+requirements-bump:
+	$(MAKE) pip-compile-upgrade
+	pre-commit run --all-files
+	$(MAKE) build
+	$(MAKE) test
+	$(MAKE) mypy

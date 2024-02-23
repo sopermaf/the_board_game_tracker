@@ -17,7 +17,7 @@ asttokens==2.4.1
     # via stack-data
 babel==2.14.0
     # via sphinx
-black==24.1.1
+black==24.2.0
     # via -r requirements/local.in
 build==1.0.3
     # via pip-tools
@@ -39,7 +39,7 @@ click==8.1.7
     #   pip-tools
 colorama==0.4.6
     # via sphinx-autobuild
-coverage==7.4.1
+coverage==7.4.2
     # via
     #   -r requirements/local.in
     #   django-coverage-plugin
@@ -75,7 +75,7 @@ executing==2.0.1
     # via stack-data
 factory-boy==3.3.0
     # via -r requirements/local.in
-faker==23.1.0
+faker==23.2.1
     # via factory-boy
 filelock==3.13.1
     # via virtualenv
@@ -87,7 +87,7 @@ flake8-isort==6.1.1
     # via -r requirements/local.in
 freezegun==1.4.0
     # via -r requirements/local.in
-identify==2.5.33
+identify==2.5.35
     # via pre-commit
 idna==3.6
     # via
@@ -100,7 +100,7 @@ iniconfig==2.0.0
     # via pytest
 ipdb==0.13.13
     # via -r requirements/local.in
-ipython==8.21.0
+ipython==8.22.1
     # via ipdb
 isort==5.13.2
     # via
@@ -146,7 +146,7 @@ pathspec==0.12.1
     # via black
 pexpect==4.9.0
     # via ipython
-pip-tools==7.3.0
+pip-tools==7.4.0
     # via -r requirements/local.in
 platformdirs==4.2.0
     # via
@@ -155,7 +155,7 @@ platformdirs==4.2.0
     #   virtualenv
 pluggy==1.4.0
     # via pytest
-pre-commit==3.6.0
+pre-commit==3.6.2
     # via -r requirements/local.in
 prompt-toolkit==3.0.43
     # via ipython
@@ -184,8 +184,10 @@ pylint-django==2.5.5
 pylint-plugin-utils==0.8.2
     # via pylint-django
 pyproject-hooks==1.0.0
-    # via build
-pytest==8.0.0
+    # via
+    #   build
+    #   pip-tools
+pytest==8.0.1
     # via
     #   -r requirements/local.in
     #   pytest-django
@@ -252,20 +254,20 @@ types-pytz==2024.1.0.20240203
     # via django-stubs
 types-pyyaml==6.0.12.12
     # via django-stubs
-types-requests==2.31.0.20240125
+types-requests==2.31.0.20240218
     # via -r requirements/local.in
 typing-extensions==4.9.0
     # via
     #   django-stubs
     #   django-stubs-ext
     #   mypy
-urllib3==2.2.0
+urllib3==2.2.1
     # via
     #   -c requirements/base.txt
     #   -c requirements/production.txt
     #   requests
     #   types-requests
-virtualenv==20.25.0
+virtualenv==20.25.1
     # via pre-commit
 watchdog==4.0.0
     # via werkzeug
