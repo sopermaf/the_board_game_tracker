@@ -146,7 +146,7 @@ pathspec==0.12.1
     # via black
 pexpect==4.9.0
     # via ipython
-pip-tools==7.4.0
+pip-tools==7.4.1
     # via -r requirements/local.in
 platformdirs==4.2.0
     # via
