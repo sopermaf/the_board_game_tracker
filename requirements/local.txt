@@ -187,7 +187,7 @@ pyproject-hooks==1.0.0
     # via
     #   build
     #   pip-tools
-pytest==8.0.1
+pytest==8.1.1
     # via
     #   -r requirements/local.in
     #   pytest-django
