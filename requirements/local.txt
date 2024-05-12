@@ -6,20 +6,25 @@
 #
 alabaster==0.7.16
     # via sphinx
-asgiref==3.7.2
+anyio==4.3.0
+    # via
+    #   starlette
+    #   watchfiles
+asgiref==3.8.1
     # via
     #   -c requirements/base.txt
     #   -c requirements/production.txt
     #   django
-astroid==3.0.3
+    #   django-stubs
+astroid==3.1.0
     # via pylint
 asttokens==2.4.1
     # via stack-data
-babel==2.14.0
+babel==2.15.0
     # via sphinx
-black==24.2.0
+black==24.4.2
     # via -r requirements/local.in
-build==1.0.3
+build==1.2.1
     # via pip-tools
 certifi==2024.2.2
     # via
@@ -37,9 +42,10 @@ click==8.1.7
     # via
     #   black
     #   pip-tools
+    #   uvicorn
 colorama==0.4.6
     # via sphinx-autobuild
-coverage==7.4.2
+coverage==7.5.1
     # via
     #   -r requirements/local.in
     #   django-coverage-plugin
@@ -51,7 +57,7 @@ dill==0.3.8
     # via pylint
 distlib==0.3.8
     # via virtualenv
-django==5.0.2
+django==5.0.6
     # via
     #   -c requirements/base.txt
     #   -c requirements/production.txt
@@ -65,19 +71,19 @@ django-debug-toolbar==4.3.0
     # via -r requirements/local.in
 django-extensions==3.2.3
     # via -r requirements/local.in
-django-stubs[compatible-mypy]==4.2.7
+django-stubs[compatible-mypy]==5.0.0
     # via -r requirements/local.in
-django-stubs-ext==4.2.7
+django-stubs-ext==5.0.0
     # via django-stubs
-docutils==0.20.1
+docutils==0.21.2
     # via sphinx
 executing==2.0.1
     # via stack-data
 factory-boy==3.3.0
     # via -r requirements/local.in
-faker==23.2.1
+faker==25.1.0
     # via factory-boy
-filelock==3.13.1
+filelock==3.14.0
     # via virtualenv
 flake8==7.0.0
     # via
@@ -85,14 +91,17 @@ flake8==7.0.0
     #   flake8-isort
 flake8-isort==6.1.1
     # via -r requirements/local.in
-freezegun==1.4.0
+freezegun==1.5.1
     # via -r requirements/local.in
-identify==2.5.35
+h11==0.14.0
+    # via uvicorn
+identify==2.5.36
     # via pre-commit
-idna==3.6
+idna==3.7
     # via
     #   -c requirements/base.txt
     #   -c requirements/production.txt
+    #   anyio
     #   requests
 imagesize==1.4.1
     # via sphinx
@@ -100,7 +109,7 @@ iniconfig==2.0.0
     # via pytest
 ipdb==0.13.13
     # via -r requirements/local.in
-ipython==8.22.1
+ipython==8.24.0
     # via ipdb
 isort==5.13.2
     # via
@@ -108,21 +117,19 @@ isort==5.13.2
     #   pylint
 jedi==0.19.1
     # via ipython
-jinja2==3.1.3
+jinja2==3.1.4
     # via sphinx
-livereload==2.6.3
-    # via sphinx-autobuild
 markupsafe==2.1.5
     # via
     #   jinja2
     #   werkzeug
-matplotlib-inline==0.1.6
+matplotlib-inline==0.1.7
     # via ipython
 mccabe==0.7.0
     # via
     #   flake8
     #   pylint
-mypy==1.7.1
+mypy==1.10.0
     # via
     #   -r requirements/local.in
     #   django-stubs
@@ -132,7 +139,7 @@ mypy-extensions==1.0.0
     #   mypy
 nodeenv==1.8.0
     # via pre-commit
-packaging==23.2
+packaging==24.0
     # via
     #   -c requirements/production.txt
     #   black
@@ -140,22 +147,22 @@ packaging==23.2
     #   pytest
     #   pytest-sugar
     #   sphinx
-parso==0.8.3
+parso==0.8.4
     # via jedi
 pathspec==0.12.1
     # via black
 pexpect==4.9.0
     # via ipython
-pip-tools==7.4.0
+pip-tools==7.4.1
     # via -r requirements/local.in
-platformdirs==4.2.0
+platformdirs==4.2.1
     # via
     #   black
     #   pylint
     #   virtualenv
-pluggy==1.4.0
+pluggy==1.5.0
     # via pytest
-pre-commit==3.6.2
+pre-commit==3.7.1
     # via -r requirements/local.in
 prompt-toolkit==3.0.43
     # via ipython
@@ -171,11 +178,11 @@ pycodestyle==2.11.1
     # via flake8
 pyflakes==3.2.0
     # via flake8
-pygments==2.17.2
+pygments==2.18.0
     # via
     #   ipython
     #   sphinx
-pylint==3.0.3
+pylint==3.1.0
     # via
     #   pylint-django
     #   pylint-plugin-utils
@@ -183,11 +190,11 @@ pylint-django==2.5.5
     # via -r requirements/local.in
 pylint-plugin-utils==0.8.2
     # via pylint-django
-pyproject-hooks==1.0.0
+pyproject-hooks==1.1.0
     # via
     #   build
     #   pip-tools
-pytest==8.0.1
+pytest==8.2.0
     # via
     #   -r requirements/local.in
     #   pytest-django
@@ -196,7 +203,7 @@ pytest-django==4.8.0
     # via -r requirements/local.in
 pytest-sugar==1.0.0
     # via -r requirements/local.in
-python-dateutil==2.8.2
+python-dateutil==2.9.0.post0
     # via
     #   faker
     #   freezegun
@@ -210,15 +217,16 @@ requests==2.31.0
 six==1.16.0
     # via
     #   asttokens
-    #   livereload
     #   python-dateutil
+sniffio==1.3.1
+    # via anyio
 snowballstemmer==2.2.0
     # via sphinx
-sphinx==7.2.6
+sphinx==7.3.7
     # via
     #   -r requirements/local.in
     #   sphinx-autobuild
-sphinx-autobuild==2024.2.4
+sphinx-autobuild==2024.4.16
     # via -r requirements/local.in
 sphinxcontrib-applehelp==1.0.8
     # via sphinx
@@ -232,7 +240,7 @@ sphinxcontrib-qthelp==1.0.7
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.10
     # via sphinx
-sqlparse==0.4.4
+sqlparse==0.5.0
     # via
     #   -c requirements/base.txt
     #   -c requirements/production.txt
@@ -240,26 +248,25 @@ sqlparse==0.4.4
     #   django-debug-toolbar
 stack-data==0.6.3
     # via ipython
+starlette==0.37.2
+    # via sphinx-autobuild
 termcolor==2.4.0
     # via pytest-sugar
-tomlkit==0.12.3
+tomlkit==0.12.5
     # via pylint
-tornado==6.4
-    # via livereload
-traitlets==5.14.1
+traitlets==5.14.3
     # via
     #   ipython
     #   matplotlib-inline
-types-pytz==2024.1.0.20240203
+types-pyyaml==6.0.12.20240311
     # via django-stubs
-types-pyyaml==6.0.12.12
-    # via django-stubs
-types-requests==2.31.0.20240218
+types-requests==2.31.0.20240406
     # via -r requirements/local.in
-typing-extensions==4.9.0
+typing-extensions==4.11.0
     # via
     #   django-stubs
     #   django-stubs-ext
+    #   ipython
     #   mypy
 urllib3==2.2.1
     # via
@@ -267,15 +274,21 @@ urllib3==2.2.1
     #   -c requirements/production.txt
     #   requests
     #   types-requests
-virtualenv==20.25.1
+uvicorn==0.29.0
+    # via sphinx-autobuild
+virtualenv==20.26.1
     # via pre-commit
 watchdog==4.0.0
     # via werkzeug
+watchfiles==0.21.0
+    # via sphinx-autobuild
 wcwidth==0.2.13
     # via prompt-toolkit
-werkzeug[watchdog]==3.0.1
+websockets==12.0
+    # via sphinx-autobuild
+werkzeug[watchdog]==3.0.3
     # via -r requirements/local.in
-wheel==0.42.0
+wheel==0.43.0
     # via pip-tools
 
 # The following packages are considered to be unsafe in a requirements file:
