@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements/production.in
 #
-asgiref==3.7.2
+asgiref==3.8.1
     # via
     #   -c requirements/base.txt
     #   django
@@ -16,19 +16,19 @@ charset-normalizer==3.3.2
     # via
     #   -c requirements/base.txt
     #   requests
-django==5.0.2
+django==5.0.6
     # via
     #   -c requirements/base.txt
     #   django-anymail
-django-anymail[mailgun]==10.2
+django-anymail[mailgun]==10.3
     # via -r requirements/production.in
-gunicorn==21.2.0
+gunicorn==22.0.0
     # via -r requirements/production.in
-idna==3.6
+idna==3.7
     # via
     #   -c requirements/base.txt
     #   requests
-packaging==23.2
+packaging==24.0
     # via gunicorn
 psycopg2==2.9.9
     # via -r requirements/production.in
@@ -36,11 +36,11 @@ requests==2.31.0
     # via
     #   -c requirements/base.txt
     #   django-anymail
-sqlparse==0.4.4
+sqlparse==0.5.0
     # via
     #   -c requirements/base.txt
     #   django
-urllib3==2.2.0
+urllib3==2.2.1
     # via
     #   -c requirements/base.txt
     #   django-anymail
