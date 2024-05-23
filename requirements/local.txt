@@ -6,7 +6,7 @@
 #
 alabaster==0.7.16
     # via sphinx
-anyio==4.3.0
+anyio==4.4.0
     # via
     #   starlette
     #   watchfiles
@@ -16,7 +16,7 @@ asgiref==3.8.1
     #   -c requirements/production.txt
     #   django
     #   django-stubs
-astroid==3.1.0
+astroid==3.2.2
     # via pylint
 asttokens==2.4.1
     # via stack-data
@@ -45,7 +45,7 @@ click==8.1.7
     #   uvicorn
 colorama==0.4.6
     # via sphinx-autobuild
-coverage==7.5.1
+coverage==7.5.3
     # via
     #   -r requirements/local.in
     #   django-coverage-plugin
@@ -67,13 +67,13 @@ django==5.0.6
     #   django-stubs-ext
 django-coverage-plugin==3.1.0
     # via -r requirements/local.in
-django-debug-toolbar==4.3.0
+django-debug-toolbar==4.4.2
     # via -r requirements/local.in
 django-extensions==3.2.3
     # via -r requirements/local.in
-django-stubs[compatible-mypy]==5.0.0
+django-stubs[compatible-mypy]==5.0.2
     # via -r requirements/local.in
-django-stubs-ext==5.0.0
+django-stubs-ext==5.0.2
     # via django-stubs
 docutils==0.21.2
     # via sphinx
@@ -81,7 +81,7 @@ executing==2.0.1
     # via stack-data
 factory-boy==3.3.0
     # via -r requirements/local.in
-faker==25.1.0
+faker==25.3.0
     # via factory-boy
 filelock==3.14.0
     # via virtualenv
@@ -109,7 +109,7 @@ iniconfig==2.0.0
     # via pytest
 ipdb==0.13.13
     # via -r requirements/local.in
-ipython==8.24.0
+ipython==8.25.0
     # via ipdb
 isort==5.13.2
     # via
@@ -137,7 +137,7 @@ mypy-extensions==1.0.0
     # via
     #   black
     #   mypy
-nodeenv==1.8.0
+nodeenv==1.9.0
     # via pre-commit
 packaging==24.0
     # via
@@ -155,7 +155,7 @@ pexpect==4.9.0
     # via ipython
 pip-tools==7.4.1
     # via -r requirements/local.in
-platformdirs==4.2.1
+platformdirs==4.2.2
     # via
     #   black
     #   pylint
@@ -164,7 +164,7 @@ pluggy==1.5.0
     # via pytest
 pre-commit==3.7.1
     # via -r requirements/local.in
-prompt-toolkit==3.0.43
+prompt-toolkit==3.0.45
     # via ipython
 psycopg2==2.9.9
     # via
@@ -182,7 +182,7 @@ pygments==2.18.0
     # via
     #   ipython
     #   sphinx
-pylint==3.1.0
+pylint==3.2.2
     # via
     #   pylint-django
     #   pylint-plugin-utils
@@ -194,7 +194,7 @@ pyproject-hooks==1.1.0
     # via
     #   build
     #   pip-tools
-pytest==8.2.0
+pytest==8.2.1
     # via
     #   -r requirements/local.in
     #   pytest-django
@@ -209,7 +209,7 @@ python-dateutil==2.9.0.post0
     #   freezegun
 pyyaml==6.0.1
     # via pre-commit
-requests==2.31.0
+requests==2.32.3
     # via
     #   -c requirements/base.txt
     #   -c requirements/production.txt
@@ -260,9 +260,9 @@ traitlets==5.14.3
     #   matplotlib-inline
 types-pyyaml==6.0.12.20240311
     # via django-stubs
-types-requests==2.31.0.20240406
+types-requests==2.32.0.20240523
     # via -r requirements/local.in
-typing-extensions==4.11.0
+typing-extensions==4.12.0
     # via
     #   django-stubs
     #   django-stubs-ext
@@ -274,13 +274,13 @@ urllib3==2.2.1
     #   -c requirements/production.txt
     #   requests
     #   types-requests
-uvicorn==0.29.0
+uvicorn==0.30.0
     # via sphinx-autobuild
-virtualenv==20.26.1
+virtualenv==20.26.2
     # via pre-commit
-watchdog==4.0.0
+watchdog==4.0.1
     # via werkzeug
-watchfiles==0.21.0
+watchfiles==0.22.0
     # via sphinx-autobuild
 wcwidth==0.2.13
     # via prompt-toolkit

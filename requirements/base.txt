@@ -33,7 +33,7 @@ django==5.0.6
     #   django-redis
     #   djangorestframework
     #   inclusive-django-range-fields
-django-allauth==0.62.1
+django-allauth==0.63.3
     # via -r requirements/base.in
 django-crispy-forms==2.1
     # via
@@ -67,7 +67,7 @@ redis==5.0.4
     # via
     #   -r requirements/base.in
     #   django-redis
-requests==2.31.0
+requests==2.32.3
     # via -r requirements/base.in
 soupsieve==2.5
     # via beautifulsoup4
