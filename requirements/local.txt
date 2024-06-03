@@ -260,7 +260,7 @@ traitlets==5.14.3
     #   matplotlib-inline
 types-pyyaml==6.0.12.20240311
     # via django-stubs
-types-requests==2.32.0.20240523
+types-requests==2.32.0.20240602
     # via -r requirements/local.in
 typing-extensions==4.12.0
     # via
