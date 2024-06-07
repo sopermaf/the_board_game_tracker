@@ -10,8 +10,6 @@ argon2-cffi-bindings==21.2.0
     # via argon2-cffi
 asgiref==3.8.1
     # via django
-async-timeout==4.0.3
-    # via redis
 beautifulsoup4==4.12.3
     # via -r requirements/base.in
 certifi==2024.2.2
@@ -63,7 +61,7 @@ python-slugify==8.0.4
     # via -r requirements/base.in
 pytz==2024.1
     # via -r requirements/base.in
-redis==5.0.4
+redis==5.0.5
     # via
     #   -r requirements/base.in
     #   django-redis
