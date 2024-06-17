@@ -10,8 +10,6 @@ argon2-cffi-bindings==21.2.0
     # via argon2-cffi
 asgiref==3.8.1
     # via django
-async-timeout==4.0.3
-    # via redis
 beautifulsoup4==4.12.3
     # via -r requirements/base.in
 certifi==2024.2.2
@@ -35,7 +33,7 @@ django==5.0.6
     #   inclusive-django-range-fields
 django-allauth==0.63.3
     # via -r requirements/base.in
-django-crispy-forms==2.1
+django-crispy-forms==2.2
     # via
     #   -r requirements/base.in
     #   crispy-bootstrap5
