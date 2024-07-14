@@ -19,3 +19,4 @@ crispy-bootstrap5
 django-redis
 django-filter
 inclusive-django-range-fields
+django_browser_reload
