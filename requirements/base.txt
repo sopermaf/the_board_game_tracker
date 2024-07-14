@@ -58,7 +58,7 @@ idna==3.7
     # via requests
 inclusive-django-range-fields==0.2.3
     # via -r requirements/base.in
-pillow==10.3.0
+pillow==10.4.0
     # via -r requirements/base.in
 pycparser==2.22
     # via cffi
