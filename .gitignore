@@ -276,3 +276,6 @@ the_board_game_tracker/media/
 .env
 .envs/*
 !.envs/.local/
+
+
+.vscode
