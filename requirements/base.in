@@ -10,7 +10,7 @@ requests
 
 # Django
 # ------------------------------------------------------------------------------
-django
+django==5.0.*
 django-environ
 django-model-utils
 django-allauth

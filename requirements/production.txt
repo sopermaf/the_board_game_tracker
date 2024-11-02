@@ -8,39 +8,39 @@ asgiref==3.8.1
     # via
     #   -c requirements/base.txt
     #   django
-certifi==2024.6.2
+certifi==2024.8.30
     # via
     #   -c requirements/base.txt
     #   requests
-charset-normalizer==3.3.2
+charset-normalizer==3.4.0
     # via
     #   -c requirements/base.txt
     #   requests
-django==5.0.6
+django==5.0.9
     # via
     #   -c requirements/base.txt
     #   django-anymail
-django-anymail[mailgun]==11.0
+django-anymail[mailgun]==12.0
     # via -r requirements/production.in
-gunicorn==22.0.0
+gunicorn==23.0.0
     # via -r requirements/production.in
-idna==3.7
+idna==3.10
     # via
     #   -c requirements/base.txt
     #   requests
 packaging==24.1
     # via gunicorn
-psycopg2==2.9.9
+psycopg2==2.9.10
     # via -r requirements/production.in
 requests==2.32.3
     # via
     #   -c requirements/base.txt
     #   django-anymail
-sqlparse==0.5.0
+sqlparse==0.5.1
     # via
     #   -c requirements/base.txt
     #   django
-urllib3==2.2.2
+urllib3==2.2.3
     # via
     #   -c requirements/base.txt
     #   django-anymail
