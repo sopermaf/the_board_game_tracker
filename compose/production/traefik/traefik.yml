@@ -28,7 +28,7 @@ certificatesResolvers:
 http:
   routers:
     web-secure-router:
-      rule: "Host(`fabianboardgametable.site`) || Host(`www.fabianboardgametable.site`)"
+      rule: "Host(`fabianboardgametable.site`) || Host(`www.fabianboardgametable.site`) || Host(`fabianboardgametable.website`) || Host(`www.fabianboardgametable.website`)"
       entryPoints:
         - web-secure
       middlewares:
